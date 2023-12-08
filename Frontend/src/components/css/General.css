@@ -1,5 +1,11 @@
 .descrip{
-    width: 60%;
+    margin-top: 40px;
+    padding-top: 40px;
+    width: 80%;
     background-color: bisque;
     color: black;
+}
+
+p{
+    text-align: justify;
 }
