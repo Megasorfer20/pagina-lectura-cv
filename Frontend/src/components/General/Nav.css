@@ -14,22 +14,44 @@
     z-index: 1000;
   }
   
-  .logo-container img {
-    height: 3rem;
+ /* styles.css */
+.logo-container img {
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: appearFromLeft 1s forwards;
+  height: 3rem;
+}
+
+@keyframes appearFromLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
+}
+
   
   .login-container {
     display: flex;
     align-items: center;
   }
   
-  .login-btn {
-    background-color: #007bff;
-    margin-right: 35px;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
+.login-btn {
+  opacity: 0;
+  transform: translateX(50px);
+  animation: appearFromRight 1s forwards;
+  background-color: #007bff;
+  margin-right: 35px;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+@keyframes appearFromRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
+}
+
   
