@@ -2,7 +2,7 @@ import Nav from './components/General/Nav';
 import Footer from './components/Footer';
 import General from './components/General/General';
 import Filtro from './components/Filtro';
-import Card from './components/Cards';
+import Cards from './components/Cards';
 import './App.css';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <General></General>
         <br></br>
         <Filtro></Filtro>
-        <Card></Card>
+        <Cards></Cards>
       </header>
       <Footer></Footer>
     </div>
