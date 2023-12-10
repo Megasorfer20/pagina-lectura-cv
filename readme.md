@@ -5,8 +5,8 @@ Algunos datos pueden tener mas campos, pero no se usarian para mas adelante.
 
 **Lengujage de programacion**
 
-- tecnologyName
-- tecnologyDescription
+- technologyName
+- technologyDescription
 
 **Campers**
 
@@ -15,7 +15,7 @@ Algunos datos pueden tener mas campos, pero no se usarian para mas adelante.
 - especiality
 - tecnologies
 - position
-- localidad
+- locality
 - salary
 - englishLevel
 - photo

@@ -8,19 +8,19 @@ export const getsControllers = async (req, res) => {
 
     switch (colection) {
       case "campers":
-        data = getCampers();
+        data = await getCampers();
         break;
       case "camperDetail":
-        data = getCampersDetails();
+        data = await getCampersDetails();
         break;
       case "users":
-        data = getUsers();
+        data = await getUsers();
         break;
       case "usersType":
-        data = getUsersType();
+        data = await getUsersType();
         break;
       case "programingLaguage":
-        data = getProgramingLanguage();
+        data = await getProgramingLanguage();
         break;
       default:
         data = { message: "Registro No Encontrado" };
