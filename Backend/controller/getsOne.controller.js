@@ -1,26 +1,26 @@
 import { conection, client } from "../database/dbconection.js";
 
-export const getsControllers = async (req, res) => {
+export const getsOneControllers = async (req, res) => {
   try {
-    const { colection } = req.params;
+    const { colection, id } = req.params;
 
     let data;
 
     switch (colection) {
       case "campers":
-        data = getCampers();
+        data = getCampers(id);
         break;
       case "camperDetail":
-        data = getCampersDetails();
+        data = getCampersDetails(id);
         break;
       case "users":
-        data = getUsers();
+        data = getUsers(id);
         break;
       case "usersType":
-        data = getUsersType();
+        data = getUsersType(id);
         break;
       case "programingLaguage":
-        data = getProgramingLanguage();
+        data = getProgramingLanguage(id);
         break;
       default:
         data = { message: "Registro No Encontrado" };
