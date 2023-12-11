@@ -13,7 +13,7 @@ const Login = ({ onClose }) => {
         
         <h2>Login</h2>
 
-        <img className='logo' src={Logo} alt="Logo" />
+        <img className='logol' src={Logo} alt="Logo" />
 
         <h3>Usuario</h3>
         <input type="text" />
