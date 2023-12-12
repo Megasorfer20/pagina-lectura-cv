@@ -10,7 +10,6 @@ const Cards = () => {
   const [dotsCount, setDotsCount] = useState(3);
 
   useEffect(() => {
-    // Llamada a la API al montar el componente
     fetch('http://localhost:5000/API/campers')
       .then(response => response.json())
       .then(data => {
@@ -21,7 +20,7 @@ const Cards = () => {
         console.error('Error fetching campers:', error);
         setLoading(false);
       });
-  }, []); // La dependencia vacía indica que se ejecuta solo al montar el componente
+  }, []);
 
   const openModal = (title, description) => {
     setSelectedCard({ title, description });
@@ -33,20 +32,18 @@ const Cards = () => {
   };
 
   useEffect(() => {
-    // Parpadeo de los puntos suspensivos
     const intervalId = setInterval(() => {
       setDotsCount(prevCount => (prevCount === 0 ? 3 : prevCount - 1));
-    }, 1000); // Cambia el valor cada segundo (1000 ms)
+    }, 1000);
 
-    // Limpiar el intervalo al desmontar el componente
     return () => clearInterval(intervalId);
   }, []);
 
   return (
     <div className="card-container">
-      {loading && <p>Cargando{'.'.repeat(dotsCount)}</p>}
+      {loading && <p>Loading{'.'.repeat(dotsCount)}</p>}
       {!loading && campers.length === 0 && (
-        <p>No se encontraron resultados{'.'.repeat(dotsCount)}</p>
+        <p>No results found{'.'.repeat(dotsCount)}</p>
       )}
       {!loading &&
         campers.map((camper, index) => (

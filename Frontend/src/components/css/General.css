@@ -20,6 +20,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     animation: openFromCenter 0.8s ease-in-out;
+    
 }
 
 
@@ -31,6 +32,7 @@
     text-align: justify;
     padding-left: 5%;
     padding-right: 5%;
+    font-family: 'Roboto Mono';font-size: 22px;
 }
 
 @keyframes fadeIn {
@@ -43,8 +45,9 @@
 }
 
 .tituloGen {
-    width: 65%;
+    width: 80%;
     margin-top: 0%;
+    font-family: 'Poppins';font-size: 40px;
 }
 
 .tituloGen span {
@@ -89,9 +92,9 @@
     animation: waveAnimation 1.5s 1;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1000px) {
     .descrip {
-        margin-top: 20%;
+        margin-top: 25%;
     }
     .logo {
         width: 26%;

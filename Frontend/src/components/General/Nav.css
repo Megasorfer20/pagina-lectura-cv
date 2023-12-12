@@ -14,12 +14,11 @@
     z-index: 1000;
   }
   
- /* styles.css */
 .logo-container img {
   opacity: 0;
   transform: translateX(-50px);
   animation: appearFromLeft 1s forwards;
-  height: 3rem;
+  height: 4rem;
 }
 
 @keyframes appearFromLeft {
@@ -35,23 +34,40 @@
     align-items: center;
   }
   
-.login-btn {
-  opacity: 0;
-  transform: translateX(50px);
-  animation: appearFromRight 1s forwards;
-  background-color: #007bff;
-  margin-right: 35px;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-}
-
-@keyframes appearFromRight {
-  to {
-    opacity: 1;
-    transform: translateX(0);
+  .login-btn {
+    opacity: 0;
+    transform: translateX(50px);
+    animation: appearFromRight 1s forwards;
+    background-color: #00AA80;
+    margin-right: 35px;
+    color: white;
+    padding: 14px 26px;
+    font-family: 'Poppins'; 
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 4rem;
   }
-}
-
+  
+  .login-btn:hover {
+    background-color: #00e1a9;
+    transform: translateX(40px) scale(1.05);
+    padding: 14px 28px;
+    color: black;
+    box-shadow: 0 4px 8px #67ffd9;
+  }
+  
+  @keyframes appearFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  
   

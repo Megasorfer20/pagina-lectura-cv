@@ -6,7 +6,7 @@ const General = () => {
   return (
     <div className='descrip'>
         <div className='center'>
-        <h3 className='tituloGen'><span>Portfolio de Candidatos destacados</span></h3>
+        <h2 className='tituloGen'><span>Portfolio de Candidatos destacados</span></h2>
         </div>
         <img className='logo' src={Logo} alt="Logo" />
         <p className='pe'>
