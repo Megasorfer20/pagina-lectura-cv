@@ -37,22 +37,26 @@ export const postsControllers = async (req, res) => {
 const postCampers = async (dataEntered) => {
   try {
     const {
+      submitedBy,
       name,
+      lastName,
       seniority,
+      programmerType,
       especiality,
       tecnologies,
-      position,
       locality,
       salary,
       englishLevel,
       photo,
     } = dataEntered;
     const data = {
+      submitedBy,
       name,
+      lastName,
       seniority,
+      programmerType,
       especiality,
       tecnologies,
-      position,
       locality,
       salary,
       englishLevel,
@@ -70,11 +74,12 @@ const postCampers = async (dataEntered) => {
 
 const postCampersDetails = async (dataEntered) => {
   try {
-    const { biography, stack, experiency } = dataEntered;
+    const { biography, stack, experiencie,softSkills } = dataEntered;
     const data = {
       biography,
       stack,
-      experiency,
+      experiencie,
+      softSkills,
       status: true,
     };
     const campersDetailDB = (await conection()).campersDetail;
