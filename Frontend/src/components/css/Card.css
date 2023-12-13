@@ -6,6 +6,15 @@
     align-items: center;
   }
   
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
   .card {
     color: black;
     background-color: #ffffff;
@@ -17,6 +26,106 @@
     box-sizing: border-box;
     margin-bottom: 16px;
     margin: 20px;
+    position: relative;
+    animation: fadeIn 1s ease forwards;
   }
   
+  .card:hover {
+    color: black;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    width: 230px;
+    height: 340px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    margin: 20px;
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+  }
   
+  .detalles {
+    position: relative;
+    top: -20px;
+    width: 125px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .card:hover .detalles {
+    opacity: 1;
+  }
+
+
+
+  
+  .contenido{
+    font-size: medium;
+    background-color: aqua;
+    text-align: center;
+    height: 20rem;
+  }
+
+  .encabezado {
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .ingles {
+    position: absolute;
+    top: -11px;
+    right: 5px;
+  }
+  .senior{
+    position: absolute;
+    top: -11px;
+    left: 6px;
+  }
+  .enfoque {
+    position: relative;
+    top: -18px;
+    padding: 0%;
+    margin: 0%;
+  }
+
+.carecter{
+  position: relative;
+  top: -24px;
+}
+
+
+.genera {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  top: -24px;
+}
+
+.genera p {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: start; 
+}
+
+
+
+  .avatar{
+    position: relative;
+    top: -16px;
+    width: 50%;
+    padding: 0%;
+    margin: 0%;
+  }
+
+  .lineal{
+    font-size: small;
+    margin-bottom: 25px;
+  }

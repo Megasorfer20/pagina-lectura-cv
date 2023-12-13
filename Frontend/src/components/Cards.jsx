@@ -48,8 +48,14 @@ const Cards = () => {
       {!loading &&
         campers.map((camper, index) => (
           <div key={index} className="card">
-            <h2>{camper.name}</h2>
-            <p>{camper.description}</p>
+            <h2>{`${camper.name} ${camper.lastName}`}</h2>
+            <img src={camper.photo} alt={`${camper.name} ${camper.lastName}`} />
+            <p>{`Specialty: ${camper.specialty}`}</p>
+            <p>{`Technologies: ${camper.technologies.join(', ')}`}</p>
+            <p>{`Seniority: ${camper.seniority}`}</p>
+            <p>{`Programmer Type: ${camper.programmerType}`}</p>
+            <p>{`Locality: ${camper.locality}`}</p>
+            <p>{`English Level: ${camper.englishLevel}`}</p>
             <button onClick={() => openModal(camper.name, camper.description)}>
               Detalles
             </button>
@@ -62,8 +68,33 @@ const Cards = () => {
             )}
           </div>
         ))}
+
+          <div className="card">
+            <div className='contenido'>
+              <div className='encabezado'>
+            <p className='senior'>Jr.</p>
+            <p>Sebastian Andres Zuluaga Salgado</p>
+            <p className='ingles'>A3</p>
+              </div>
+            <img className='avatar' src='https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png' alt=''/>
+            <p className='enfoque'>Web Development</p>
+              <div className='carecter'>
+            <p className='lineal'>"Javascript","NodeJs","PHP","React"</p>
+            <div className='genera'>
+            <p>Fullstack Developer</p>
+            <p>Colombia</p>
+            </div>
+              </div>
+            </div>
+            <button className='detalles'>
+              Detalles
+            </button>
+          </div>
+
+              
     </div>
   );
+  
 };
 
 export default Cards;
