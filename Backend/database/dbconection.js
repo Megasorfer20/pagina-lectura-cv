@@ -18,7 +18,7 @@ const conection = async () => {
     const db = await client.db(dbkey);
     const colections = {
       campers: db.collection("campers"),
-      campersDetail: db.collection("campersDetail"),
+      campersDetail: db.collection("campersDetails"),
       programingLaguage: db.collection("programingLaguage"),
       usersType: db.collection("usersType"),
       users: db.collection("users"),
