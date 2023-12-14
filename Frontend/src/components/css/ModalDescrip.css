@@ -45,3 +45,21 @@
   }
 }
 
+.textoError {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.botonERR{
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 25%;
+}
+
+.contenidoError{
+background-color: white;
+border-radius: 50%;
+
+}

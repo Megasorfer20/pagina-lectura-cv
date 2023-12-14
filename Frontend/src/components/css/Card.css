@@ -170,3 +170,14 @@
     padding: 2%;
     font-family: 'Poppins';
   }
+
+  .cargaerror{
+    background-color: white;
+    border-radius: 50%;
+  }
+
+  .cargaerror img{
+    top: 0%;
+    bottom: 0%;
+  }
+  

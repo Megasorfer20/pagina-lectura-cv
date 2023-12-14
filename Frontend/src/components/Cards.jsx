@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ModalDescrip from './ModalDescrip';
+import Carga from './Carga';
 import './css/Card.css';
 
 const Cards = () => {
@@ -35,7 +36,7 @@ const Cards = () => {
 
   return (
     <div className="card-container">
-      {loading && <p>Loading{'.'.repeat(dotsCount)}</p>}
+      {loading && <div className='cargaerror'><Carga></Carga></div>}
       {!loading && campers.length === 0 && (
         <p>No results found{'.'.repeat(dotsCount)}</p>
       )}

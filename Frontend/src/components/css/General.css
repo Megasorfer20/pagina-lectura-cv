@@ -12,7 +12,6 @@
 }
 
 .descrip {
-    margin-top: 5%;
     width: 80%;
     color: black;
     background-color: #D9D9D9;
@@ -20,6 +19,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     animation: openFromCenter 0.8s ease-in-out;
+    margin-top: 4%;
     
 }
 
