@@ -18,9 +18,9 @@ const conection = async () => {
     const db = await client.db(dbkey);
     const colections = {
       campers: db.collection("campers"),
-      campersDetail: db.collection("campersDetails"),
-      programingLaguage: db.collection("programingLaguage"),
-      usersType: db.collection("usersType"),
+      campersDetails: db.collection("campersDetails"),
+      programingLaguage: db.collection("programingLaguages"),
+      usersType: db.collection("usersTypes"),
       users: db.collection("users"),
     };
     console.log(`Conección exitosa`);

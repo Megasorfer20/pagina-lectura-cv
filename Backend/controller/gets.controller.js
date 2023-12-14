@@ -10,7 +10,7 @@ export const getsControllers = async (req, res) => {
       case "campers":
         data = await getCampers();
         break;
-      case "camperDetail":
+      case "campersDetails":
         data = await getCampersDetails();
         break;
       case "users":
@@ -46,7 +46,7 @@ const getCampers = async () => {
 
 const getCampersDetails = async () => {
   try {
-    const campersDetailDB = (await conection()).campersDetail;
+    const campersDetailDB = (await conection()).campersDetails;
     const campersDetail = await campersDetailDB.find({ status: true }).toArray();
     return campersDetail;
   } catch (error) {
