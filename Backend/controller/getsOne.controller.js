@@ -5,7 +5,7 @@ export const getsOneControllers = async (req, res) => {
   try {
     const { colection, id } = req.params;
 
-const idParse = new ObjectId(id)
+    const idParse = new ObjectId(id);
 
     let data;
 
@@ -15,6 +15,9 @@ const idParse = new ObjectId(id)
         break;
       case "camperDetail":
         data = await getCampersDetails(idParse);
+        break;
+      case "campersDetailsbyCamper":
+        data = await getCampersDetailsbyCamperId(idParse);
         break;
       case "users":
         data = await getUsers(idParse);
@@ -40,7 +43,9 @@ const idParse = new ObjectId(id)
 const getCampers = async (identifier) => {
   try {
     const campersDB = (await conection()).campers;
-    const campers = await campersDB.find({ _id:identifier, status: true }).toArray();
+    const campers = await campersDB
+      .find({ _id: identifier, status: true })
+      .toArray();
     return campers;
   } catch (error) {
     return error;
@@ -49,8 +54,22 @@ const getCampers = async (identifier) => {
 
 const getCampersDetails = async (identifier) => {
   try {
-    const campersDetailDB = (await conection()).campersDetail;
-    const campersDetail = await campersDetailDB.find({ _id:identifier, status: true }).toArray();
+    const campersDetailDB = (await conection()).campersDetails;
+    const campersDetail = await campersDetailDB
+      .find({ _id: identifier, status: true })
+      .toArray();
+    return campersDetail;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getCampersDetailsbyCamperId = async (identifier) => {
+  try {
+    const campersDetailDB = (await conection()).campersDetails;
+    const campersDetail = await campersDetailDB
+      .find({ camper: identifier, status: true })
+      .toArray();
     return campersDetail;
   } catch (error) {
     return error;
@@ -60,7 +79,9 @@ const getCampersDetails = async (identifier) => {
 const getUsers = async (identifier) => {
   try {
     const usersDB = (await conection()).users;
-    const users = await usersDB.find({ _id:identifier, status: true }).toArray();
+    const users = await usersDB
+      .find({ _id: identifier, status: true })
+      .toArray();
     return users;
   } catch (error) {
     return error;
@@ -70,7 +91,9 @@ const getUsers = async (identifier) => {
 const getUsersType = async (identifier) => {
   try {
     const usersTypeDB = (await conection()).usersType;
-    const usersType = await usersTypeDB.find({ _id:identifier, status: true }).toArray();
+    const usersType = await usersTypeDB
+      .find({ _id: identifier, status: true })
+      .toArray();
     return usersType;
   } catch (error) {
     return error;
@@ -80,7 +103,9 @@ const getUsersType = async (identifier) => {
 const getProgramingLanguage = async (identifier) => {
   try {
     const programingLaguageDB = (await conection()).programingLaguage;
-    const programingLaguage = await programingLaguageDB.find({ _id:identifier, status: true }).toArray();
+    const programingLaguage = await programingLaguageDB
+      .find({ _id: identifier, status: true })
+      .toArray();
     return programingLaguage;
   } catch (error) {
     return error;
