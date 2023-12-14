@@ -19,8 +19,8 @@ const conection = async () => {
     const colections = {
       campers: db.collection("campers"),
       campersDetails: db.collection("campersDetails"),
-      programingLaguage: db.collection("programingLaguage"),
-      usersType: db.collection("usersType"),
+      programingLaguage: db.collection("programingLaguages"),
+      usersType: db.collection("usersTypes"),
       users: db.collection("users"),
     };
     console.log(`Conección exitosa`);
