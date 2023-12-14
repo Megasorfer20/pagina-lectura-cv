@@ -3,11 +3,14 @@ import ModalDescrip from './ModalDescrip';
 import './css/Card.css';
 
 const Cards = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [campers, setCampers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [dotsCount, setDotsCount] = useState(3);
+
+  const toggleModal = (id, title, description) => {
+    setSelectedCard({ id, title, description });
+  };
 
   useEffect(() => {
     fetch('http://localhost:5000/API/campers')
@@ -21,15 +24,6 @@ const Cards = () => {
         setLoading(false);
       });
   }, []);
-
-  const openModal = (title, description) => {
-    setSelectedCard({ title, description });
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -46,55 +40,51 @@ const Cards = () => {
         <p>No results found{'.'.repeat(dotsCount)}</p>
       )}
       {!loading &&
-        campers.map((camper, index) => (
-          <div key={index} className="card">
-            <h2>{`${camper.name} ${camper.lastName}`}</h2>
-            <img src={camper.photo} alt={`${camper.name} ${camper.lastName}`} />
-            <p>{`Specialty: ${camper.specialty}`}</p>
-            <p>{`Technologies: ${camper.technologies.join(', ')}`}</p>
-            <p>{`Seniority: ${camper.seniority}`}</p>
-            <p>{`Programmer Type: ${camper.programmerType}`}</p>
-            <p>{`Locality: ${camper.locality}`}</p>
-            <p>{`English Level: ${camper.englishLevel}`}</p>
-            <button onClick={() => openModal(camper.name, camper.description)}>
-              Detalles
-            </button>
-            {isModalOpen && (
-              <ModalDescrip
-                cardTitle={selectedCard.title}
-                cardDescription={selectedCard.description}
-                onClose={closeModal}
-              />
-            )}
-          </div>
-        ))}
-
-          <div className="card">
+        campers.map(camper => (
+          <div key={camper._id} className="card">
             <div className='contenido'>
               <div className='encabezado'>
-            <p className='senior'>Jr.</p>
-            <p>Sebastian Andres Zuluaga Salgado</p>
-            <p className='ingles'>A3</p>
+                <p className='senior'>{camper.seniority}</p>
+                <p className='name'>{`${camper.name} ${camper.lastName}`}</p>
+                <p className='ingles'>{camper.englishLevel}</p>
               </div>
-            <img className='avatar' src='https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png' alt=''/>
-            <p className='enfoque'>Web Development</p>
+              <img
+                className='avatar'
+                src={`data:image/png;base64,${camper.photo}`}
+                alt=''
+              />
+              <p className='enfoque'>{camper.especiality}</p>
               <div className='carecter'>
-            <p className='lineal'>"Javascript","NodeJs","PHP","React"</p>
-            <div className='genera'>
-            <p>Fullstack Developer</p>
-            <p>Colombia</p>
-            </div>
+                <ul className='lineal'>
+                  {camper.tecnologies.slice(0, 4).map((tech, techIndex) => (
+                    <li key={techIndex}>{tech}</li>
+                  ))}
+                  {camper.tecnologies.length > 4 && <li>...</li>}
+                </ul>
+                <div className='genera'>
+                  <p>{camper.programmerType}</p>
+                  <p>{camper.locality}</p>
+                </div>
               </div>
             </div>
-            <button className='detalles'>
-              Detalles
-            </button>
-          </div>
+            <button
+  className="detalles"
+  onClick={() => toggleModal(camper._id, camper.name, camper.lastName)}
+>
+  Detalles
+</button>
 
-              
+          </div>
+        ))}
+      
+      {selectedCard.id && (
+        <ModalDescrip
+          camperId={selectedCard.id}
+          onClose={() => setSelectedCard({})}
+        />
+      )}
     </div>
   );
-  
 };
 
 export default Cards;
