@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import Nav from './components/General/Nav';
 import Footer from './components/Footer';
 import General from './components/General/General';
@@ -6,16 +7,29 @@ import Cards from './components/Cards';
 import './App.css';
 
 function App() {
+  const [filtro, setFiltro] = useState({
+    especialidad: '',
+    pais: '',
+    programmerType: '',
+    nivelIngles: '',
+    seniority: '',
+  });
+
+  const handleFilterChange = (filtro) => {
+    setFiltro(filtro);
+    
+  };
+
   return (
     <div className="App">
-      <Nav></Nav>
+      <Nav />
       <header className="App-header">
-        <General></General>
-        <br></br>
-        <Filtro></Filtro>
-        <Cards></Cards>
+        <General />
+        <br />
+        <Filtro onFilterChange={handleFilterChange} />
+        <Cards filtro={filtro} />
       </header>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }

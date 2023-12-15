@@ -11,60 +11,45 @@ const ModalDescrip = ({ camperId, fetchDetails, onClose }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Realiza la solicitud para obtener detalles de un camper específico
         const response = await fetch(`http://localhost:5000/API/campersDetailsbyCamper/${camperId}`);
         const data = await response.json();
 
-        // Verifica si data es un array
         if (Array.isArray(data)) {
-          // Filtra los datos para obtener solo el camper con el id correspondiente
           const selectedCamper = data.find((camper) => camper.camper === camperId);
 
           if (selectedCamper) {
-            // Agrega un log para ver los detalles del camper seleccionado
 
-            // Realiza una segunda solicitud para obtener el nombre y apellido del camper
             const camperResponse = await fetch(`http://localhost:5000/API/campers/${camperId}`);
             const camperDataArray = await camperResponse.json();
 
-            // Verifica si hay datos en el array
             if (camperDataArray.length > 0) {
-              // Accede al objeto dentro del array en la posición 0
               const camperData = camperDataArray[0];
 
-              // Accede a las propiedades name y lastName dentro del objeto
               const { name, lastName } = camperData;
 
-              // Actualiza el estado con los detalles del camper
               setCamperDetail({
                 ...selectedCamper,
                 name: name || 'Nombre no encontrado',
                 lastName: lastName || 'Apellido no encontrado',
               });
             } else {
-              // No se generó nada en modal-content2
               setShowMessage(true);
             }
           } else {
-            // No se generó nada en modal-content2
             setShowMessage(true);
           }
         } else {
-          // No se generó nada en modal-content2
           setShowMessage(true);
         }
 
-        // Retrasa la visibilidad del componente Carga
         setTimeout(() => {
           setLoading(false);
 
-          // Cambia a modo oscuro después de 5 segundos (ajusta el tiempo según sea necesario)
           setIsDarkMode(true);
         }, 5000);
       } catch (error) {
         console.error('Error al obtener detalles del camper:', error);
         setLoading(false);
-        // No se generó nada en modal-content2 debido a un error
         setShowMessage(true);
       }
     };
@@ -76,7 +61,6 @@ const ModalDescrip = ({ camperId, fetchDetails, onClose }) => {
     }
   }, [camperId, fetchDetails]);
 
-  // Destructura las propiedades antes de mapear
   const { stack = [], experience = [], softSkills = [] } = camperDetail;
 
   return (

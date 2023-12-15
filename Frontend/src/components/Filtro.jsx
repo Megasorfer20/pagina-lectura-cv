@@ -5,7 +5,7 @@ const Filtro = ({ onFilterChange }) => {
   const [filtro, setFiltro] = useState({
     especialidad: '',
     pais: '',
-    programmerType: '', // Cambiado de 'ciudad' a 'programmerType'
+    programmerType: '',
     nivelIngles: '',
     seniority: '',
   });
@@ -13,24 +13,21 @@ const Filtro = ({ onFilterChange }) => {
   const [options, setOptions] = useState({
     especialidades: [],
     paises: [],
-    programmerTypes: [], // Cambiado de 'ciudades' a 'programmerTypes'
+    programmerTypes: [],
     nivelesIngles: [],
     seniorities: [],
   });
 
   useEffect(() => {
-    // Realiza la solicitud a la API para obtener la lista de campers
     fetch('http://localhost:5000/API/campers')
       .then(response => response.json())
       .then(data => {
-        // Extrae las opciones únicas de cada campo
         const especialidades = [...new Set(data.map(camper => camper.especiality))];
         const paises = [...new Set(data.map(camper => camper.locality))];
         const programmerTypes = [...new Set(data.map(camper => camper.programmerType))];
         const nivelesIngles = [...new Set(data.map(camper => camper.englishLevel))];
         const seniorities = [...new Set(data.map(camper => camper.seniority))];
 
-        // Actualiza el estado con las opciones
         setOptions({
           especialidades,
           paises,
@@ -69,6 +66,7 @@ const Filtro = ({ onFilterChange }) => {
               {options.especialidades.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
+              
             </select>
           </div>
           <div>
@@ -80,6 +78,7 @@ const Filtro = ({ onFilterChange }) => {
               {options.paises.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
+              
             </select>
           </div>
           <div>
@@ -91,18 +90,20 @@ const Filtro = ({ onFilterChange }) => {
               {options.programmerTypes.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
+              
             </select>
           </div>
           <div>
-            <select
-              value={filtro.nivelIngles}
-              onChange={(e) => handleInputChange('nivelIngles', e.target.value)}
-            >
-              <option value="">Nivel de Inglés</option>
-              {options.nivelesIngles.map((option, index) => (
-                <option key={index} value={option}>{option}</option>
-              ))}
-            </select>
+          <select
+  value={filtro.nivelIngles}
+  onChange={(e) => handleInputChange('nivelIngles', e.target.value)}
+>
+  <option value="">Nivel de Inglés</option>
+  {options.nivelesIngles.map((option, index) => (
+    <option key={index} value={option}>{option}</option>
+  ))}
+  
+</select>
           </div>
           <div>
             <select
@@ -113,6 +114,7 @@ const Filtro = ({ onFilterChange }) => {
               {options.seniorities.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
+              
             </select>
           </div>
           <div>
