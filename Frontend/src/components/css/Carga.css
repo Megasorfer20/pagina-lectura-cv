@@ -43,3 +43,26 @@
     width: 180px;
   }
   
+
+  .suave {
+    position: absolute;
+    top: 51%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    opacity: 0; /* Inicialmente oculto */
+    animation: aparecer 1s ease-in-out forwards; /* Duración de 1 segundo con función de aceleración y desaceleración, y retención al final */
+
+    /* Otras propiedades de estilo si es necesario */
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0; /* Comienza completamente transparente */
+    }
+
+    to {
+        opacity: 1; /* Termina completamente visible */
+    }
+}
+

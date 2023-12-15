@@ -17,37 +17,33 @@
   
   .card {
     color: black;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
+    background-color: #ffffffca;
+    
     border-radius: 8px;
     padding: 10px;
-    width: 230px;
-    height: 340px;
+    width: 250px;
+    height: 360px;
     box-sizing: border-box;
-    margin-bottom: 16px;
     margin: 20px;
     position: relative;
     animation: fadeIn 1s ease forwards;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    display: block;
+    justify-content: center;
+    transition: transform 0.3s ease;
   }
   
   .card:hover {
-    color: black;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 10px;
-    width: 230px;
-    height: 340px;
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    margin: 20px;
+    width: 251px;
+    height: 361px;
     transform: scale(1.02);
-    transition: transform 0.3s ease;
   }
   
   .detalles {
     position: relative;
-    top: -15px;
+    top: -18px;
     width: 125px;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -61,7 +57,7 @@
     font-size: medium;
     background-color: #2CAAFF;
     text-align: center;
-    height: 20rem;
+    height: 21rem;
   }
 
   .encabezado {
@@ -90,7 +86,7 @@
     height: 15px;
     top: -14px;
     left: 2px;
-    background-color: #F4B422;
+    background-color: #D9D9D9;
     padding: 1.5%;
     border-radius: 50%;
   }
@@ -98,7 +94,6 @@
     border-radius: 0rem 0rem 5rem 5rem;
     position: relative;
     color: white;
-    
     top: -18px;
     left: 10px;
     padding: 0%;
@@ -107,68 +102,115 @@
     background-color: #000087;
   }
 
-.carecter{
-  position: relative;
-  top: -24px;
+
+  .genera {
+    margin-left: 5%;
+    width: 80%;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+.genera .first-background {
+  background-size: cover;
+ 
 }
 
-
-.genera {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  top: -24px;
+.genera .second-background {
+  background-size: cover;
+  
 }
-
+/* eslint-disable-next-line */
 .genera p {
-  background-color: #f0f0f0;
+  position: relative;
+  background-color: #D9D9D9; /* Fondo más transparente */
   padding: 10px;
   margin: 5px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  text-align: start; 
+  text-align: start;
+  border-radius: 1rem;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgb(0, 0, 0); /* Sombreado blanco para simular brillo */
+  z-index: 1;
+}
+
+.imagenRut {
+  width: 50px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 12px;
+  z-index: -1;
+}
+
+/* eslint-disable-next-line */
+
+.genera .first-background {
+  text-align: center;
+  background-size: cover;
+  width: 75px;
+}
+
+.genera .second-background {
+  background-size: cover;
 }
 
 
 
-  .avatar{
-    position: relative;
-    top: -18px;
-    width: 52%;
-    padding: 0%;
-    margin: 0%;
-    border-radius: 10% 10% 0% 0%;
-    border: 0.5px solid ;
-    box-shadow: 2px 2px 120px rgb(255, 255, 255);
-  }
 
-  .lineal {
-    font-size: small;
-    margin-bottom: 25px;
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .lineal li {
-    border: 1.1px solid #ffffff75;
-    background-color: #f4b522;
-    padding: 4px;
-    margin: 1px;
-    border-radius: 5px;
-  }
+
+.avatar {
+  position: relative;
+  top: -18px;
+  padding: 0;
+  margin: 0;
+  border-radius: 10% 10% 0 0;
+  border: 0.5px solid;
+  box-shadow: 2px 2px 120px rgb(255, 255, 255);
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+
+.lineal {
+  font-size: 15px;
+  list-style: none;
+  padding: 0%;
+  padding-bottom: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 0%;
+  margin-bottom: 2%;
+}
+
+.lineal li {
+  border: 1.1px solid #ffffff75;
+  background-color: #f4b522;
+  padding: 1px;
+  margin: 0.5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
   
 
   .name{
     background-color: #000087;
     border-radius: 0.5rem;
     color: white;
-    font-size: 90%;
+    margin-top: 10%;
+    font-size: 80%;
     padding: 2%;
     font-family: 'Poppins';
+    width: 100%;
   }
 
   .cargaerror{

@@ -55,11 +55,27 @@
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 25%;
+  bottom: 22%;
 }
 
 .contenidoError{
 background-color: white;
 border-radius: 50%;
 
+}
+
+
+
+.imagenDetalles {
+  max-width: 100%;
+  max-height: 100%;
+  width: 300px;
+  height: auto;
+}
+
+
+
+.super{
+  display: flex;
+  justify-content: space-around;
 }

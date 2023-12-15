@@ -26,7 +26,7 @@ const Carga = () => {
       ) : (
         <div>
          <div className="spinner"></div>
-        <img className='imaget' src={AstroF} alt="Logo" />
+        <img className='suave' src={AstroF} alt="Logo" />
         </div>
       )}
     </div>

@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import ModalDescrip from './ModalDescrip';
+import monitorImage from '../monitor.png';
+import globalImage from '../global.png';
 import Carga from './Carga';
 import './css/Card.css';
 
 const Cards = ({ filtro }) => {
-  const [selectedCard, setSelectedCard] = useState({});
   const [campers, setCampers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCard, setSelectedCard] = useState({});
   const [dotsCount, setDotsCount] = useState(3);
-  const [filteredCampers, setFilteredCampers] = useState([]);
-  const [options, setOptions] = useState({
-    nivelesIngles: [], // Agrega otras opciones según sea necesario
-  });
 
   useEffect(() => {
-    fetch('http://localhost:5000/API/campers')
-      .then(response => response.json())
-      .then(data => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/API/campers');
+        const data = await response.json();
         setCampers(data);
-        setFilteredCampers(data); // Inicializa con todos los campers
         setLoading(false);
-        const nivelesIngles = [...new Set(data.map(camper => camper.englishLevel))];
-        setOptions({
-          ...options,
-          nivelesIngles,
-        });
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error fetching campers:', error);
         setLoading(false);
-      });
-  }, [options]);
+      }
+    };
+
+    fetchData();
+  }, []); // Solo se ejecuta una vez al montar el componente
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -40,30 +35,19 @@ const Cards = ({ filtro }) => {
     return () => clearInterval(intervalId);
   }, []);
 
-  useEffect(() => {
-    // Filtrar campers cuando cambie el filtro
-    const filterCampers = () => {
-      // Implementa la lógica de filtrado aquí
-      let filteredData = campers.filter(camper => {
-        return (
-          (!filtro.especialidad || camper.especiality === filtro.especialidad) &&
-          (!filtro.pais || camper.locality === filtro.pais) &&
-          (!filtro.programmerType || camper.programmerType === filtro.programmerType) &&
-          (!filtro.nivelIngles || (options.nivelesIngles.includes(filtro.nivelIngles) && camper.englishLevel === filtro.nivelIngles)) &&
-          (!filtro.seniority || camper.seniority === filtro.seniority)
-        );
-      });
-
-      setFilteredCampers(filteredData);
-    };
-
-    // Llamamos a la función aquí para que sea una dependencia válida en el useEffect
-    filterCampers();
-  }, [filtro, options, campers]);
-
   const toggleModal = (id, title, description) => {
     setSelectedCard({ id, title, description });
   };
+
+  const filteredCampers = campers.filter(camper => {
+    return (
+      (!filtro.especialidad || camper.especiality === filtro.especialidad) &&
+      (!filtro.pais || camper.locality === filtro.pais) &&
+      (!filtro.programmerType || camper.programmerType === filtro.programmerType) &&
+      (!filtro.nivelIngles || camper.englishLevel === filtro.nivelIngles) &&
+      (!filtro.seniority || camper.seniority === filtro.seniority)
+    );
+  });
 
   return (
     <div className="card-container">
@@ -92,10 +76,18 @@ const Cards = ({ filtro }) => {
                 ))}
                 {camper.tecnologies.length > 4 && <li>...</li>}
               </ul>
+              
               <div className='genera'>
-                <p>{camper.programmerType}</p>
-                <p>{camper.locality}</p>
-              </div>
+  <p className='first-background'>
+    <img className='imagenRut' src={monitorImage} alt='Monitor' />
+    {camper.programmerType}
+  </p>
+  <p className='second-background'>
+    <img className='imagenRut' src={globalImage} alt='Global' />
+    {camper.locality}
+  </p>
+</div>
+
             </div>
           </div>
           <button
