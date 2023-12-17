@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import ModalDescrip from './ModalDescrip';
-import Carga from './Carga';
-import './css/Card.css';
+import React, { useState, useEffect, useMemo } from "react";
+import ModalDescrip from "./ModalDescrip";
+import Carga from "./Carga";
+import "./css/Card.css";
 
 const Cards = ({ filtro }) => {
   const [campers, setCampers] = useState([]);
@@ -13,12 +13,12 @@ const Cards = ({ filtro }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/API/campers');
+        const response = await fetch("http://localhost:5000/API/campers");
         const data = await response.json();
         setCampers(data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching campers:', error);
+        console.error("Error fetching campers:", error);
         setLoading(false);
       }
     };
@@ -28,7 +28,7 @@ const Cards = ({ filtro }) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setDotsCount(prevCount => (prevCount === 0 ? 3 : prevCount - 1));
+      setDotsCount((prevCount) => (prevCount === 0 ? 3 : prevCount - 1));
     }, 1000);
 
     return () => clearInterval(intervalId);
@@ -41,77 +41,88 @@ const Cards = ({ filtro }) => {
   // Usar useMemo para crear una clave única basada en el filtro actual
   const key = useMemo(() => JSON.stringify(filtro), [filtro]);
   const filteredCampers = useMemo(() => {
-    return campers.filter(camper => {
+    return campers.filter((camper) => {
       return (
-        (!filtro.especialidad || camper.especiality.toLowerCase() === filtro.especialidad.toLowerCase()) &&
-        (!filtro.pais || camper.locality.toLowerCase() === filtro.pais.toLowerCase()) &&
-        (!filtro.programmerType || camper.programmerType.toLowerCase() === filtro.programmerType.toLowerCase()) &&
-        (!filtro.nivelIngles || camper.englishLevel.toLowerCase() === filtro.nivelIngles.toLowerCase()) &&
-        (!filtro.seniority || camper.seniority.toLowerCase() === filtro.seniority.toLowerCase())
+        (!filtro.especialidad ||
+          camper.especiality.toLowerCase() ===
+            filtro.especialidad.toLowerCase()) &&
+        (!filtro.pais ||
+          camper.locality.toLowerCase() === filtro.pais.toLowerCase()) &&
+        (!filtro.programmerType ||
+          camper.programmerType.toLowerCase() ===
+            filtro.programmerType.toLowerCase()) &&
+        (!filtro.nivelIngles ||
+          camper.englishLevel.toLowerCase() ===
+            filtro.nivelIngles.toLowerCase()) &&
+        (!filtro.seniority ||
+          camper.seniority.toLowerCase() === filtro.seniority.toLowerCase())
       );
     });
   }, [campers, filtro]);
 
   useEffect(() => {
     // Al cambiar el filtro, actualiza el flag para forzar la recarga
-    setFilterChangeFlag(prev => !prev);
+    setFilterChangeFlag((prev) => !prev);
   }, [filtro]);
 
   return (
     <div key={key} className="card-container">
-      {loading && <div className='cargaerror'></div>}
+      {loading && <div className="cargaerror"></div>}
       {!loading && filteredCampers.length > 0 ? (
         filteredCampers.map((camper, index) => (
           <div key={`${camper._id}_${index}`} className="card animate">
-            <div className='contenido'>
-              <p className='senior'>{camper.seniority}</p>
-              <div className='encabezado'>
-                <p className='name'>{`${camper.name} ${camper.lastName}`}</p>
+            <div className="contenido">
+              <p className="senior">{camper.seniority}</p>
+              <div className="encabezado">
+                <p className="name">{`${camper.name} ${camper.lastName}`}</p>
               </div>
               <img
-                className='avatar'
+                className="avatar"
                 src={`data:image/png;base64,${camper.photo}`}
-                alt=''
+                alt=""
               />
-              <p className='enfoque'>{camper.especiality}</p>
-              <div className='valorr'>
-                <div className='center valorcontent'>
-<div className='centerrr'>
-  <span>Nivel de inglés:</span>
-  <span>País:</span>
-  <span>Preferencia salarial:</span>
-</div>
-<div className='centerrr'>
-<div className='result '>{camper.englishLevel}</div>
-<div className='result '>{camper.locality}</div>
-<div className='result '>${camper.salary}</div>
-</div>
-</div>
-  <p className='centerrr lola'><span>Tecnologías:</span></p>
-  <ul className='lineal'>
-    {camper.tecnologies.slice(0, 3).map((tech, techIndex) => (
-      <li key={techIndex}>{tech}</li>
-    ))}
-    {camper.tecnologies.length > 3 && <li>...</li>}
-  </ul>
-</div>
-
+              <p className="enfoque">{camper.especiality}</p>
+              <div className="valorr">
+                <div className="center valorcontent">
+                  <div className="centerrr">
+                    <span>Nivel de inglés:</span>
+                    <span>País:</span>
+                    <span>Preferencia salarial:</span>
+                  </div>
+                  <div className="centerrr">
+                    <div className="result ">{camper.englishLevel}</div>
+                    <div className="result ">{camper.locality}</div>
+                    <div className="result ">${camper.salary}</div>
+                  </div>
+                </div>
+                <p className="centerrr lola">
+                  <span>Tecnologías:</span>
+                </p>
+                <ul className="lineal">
+                  {camper.tecnologies.slice(0, 3).map((tech, techIndex) => (
+                    <li key={techIndex}>{tech}</li>
+                  ))}
+                  {camper.tecnologies.length > 3 && <li>...</li>}
+                </ul>
+              </div>
             </div>
             <button
               className="detalles"
-              onClick={() => toggleModal(camper._id, camper.name, camper.lastName)}
+              onClick={() =>
+                toggleModal(camper._id, camper.name, camper.lastName)
+              }
             >
               Detalles
             </button>
           </div>
         ))
       ) : (
-<div className='notfund'>
- <Carga />
-  <div className='textFilter'>
-  Houston no se encontro ningun camper {''.repeat(dotsCount)}
-  </div>
-</div>
+        <div className="notfund">
+          <Carga />
+          <div className="textFilter">
+            Houston no se encontro ningun camper {"".repeat(dotsCount)}
+          </div>
+        </div>
       )}
       {selectedCard.id && (
         <ModalDescrip

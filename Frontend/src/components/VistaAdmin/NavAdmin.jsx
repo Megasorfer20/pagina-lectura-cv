@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Logo from '../../logo-vertical-campus.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import Logo from "../../logo-vertical-campus.png";
 
 const NavAdmin = () => {
   const handleLogout = () => {
@@ -17,15 +17,15 @@ const NavAdmin = () => {
     // Cambiar la ruta a "/admin" y recargar la página
     window.location.assign("/admin");
     setTimeout(() => {
-    window.location.reload();
-  }, 100);
+      window.location.reload();
+    }, 100);
   };
 
   const handleNotificacionesClick = () => {
     window.location.assign("/admin/notificaciones");
     setTimeout(() => {
-    window.location.reload();
-  }, 100);
+      window.location.reload();
+    }, 100);
   };
 
   return (
@@ -35,13 +35,28 @@ const NavAdmin = () => {
           <img src={Logo} alt="Logo" />
         </div>
         <div className="login-container">
-          <Link to="/admin/notificaciones" className="login-btn" style={{ textDecoration: 'none' }} onClick={handleNotificacionesClick}>
+          <Link
+            to="/admin/notificaciones"
+            className="login-btn"
+            style={{ textDecoration: "none" }}
+            onClick={handleNotificacionesClick}
+          >
             Notificaciones
           </Link>
-          <Link to="/admin" className="login-btn" style={{ textDecoration: 'none' }} onClick={handleAdminClick}>
+          <Link
+            to="/admin"
+            className="login-btn"
+            style={{ textDecoration: "none" }}
+            onClick={handleAdminClick}
+          >
             Campers
           </Link>
-          <Link to="/" className="login-btn" style={{ textDecoration: 'none' }} onClick={handleLogout}>
+          <Link
+            to="/"
+            className="login-btn"
+            style={{ textDecoration: "none" }}
+            onClick={handleLogout}
+          >
             Cerrar sesión
           </Link>
         </div>

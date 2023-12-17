@@ -11,13 +11,12 @@
   z-index: 1000;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
-h3{
+h3 {
   text-align: start;
   margin: 0%;
   padding: 0%;
   margin-left: 5%;
 }
-
 
 .modal-content {
   background: #fff;
@@ -28,7 +27,8 @@ h3{
   min-height: 60vh;
   position: relative;
   opacity: 0;
-  animation: slideIn 0.4s ease-out forwards, aparecerContenido 0.4s ease-out forwards;
+  animation: slideIn 0.4s ease-out forwards,
+    aparecerContenido 0.4s ease-out forwards;
   color: black;
   overflow: hidden;
   position: relative;
@@ -79,19 +79,11 @@ h3{
   }
 }
 
-
-
-
-
-
-
-
 @media (max-width: 870px) {
   .modal-content {
     width: 70%;
   }
 }
-
 
 .close-button {
   position: absolute;
@@ -126,12 +118,7 @@ h3{
   margin-top: 5px;
 }
 
-
-
-
-
-
-.ingresa{
+.ingresa {
   border-radius: 5rem;
   width: 90%;
   height: 50px;
@@ -157,15 +144,14 @@ h3{
     transform: scale(1);
   }
   50% {
-    transform: scale(1.05); /* Escalamos el logo en un 5% a la mitad de la animación */
+    transform: scale(
+      1.05
+    ); /* Escalamos el logo en un 5% a la mitad de la animación */
   }
   100% {
     transform: scale(1);
   }
 }
-
-
-
 
 input {
   width: 90%;
@@ -183,13 +169,12 @@ input:focus {
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
 }
 
-input:hover{
+input:hover {
   box-shadow: 0 0 15px #2cabff73;
 }
 
-
-.titul{
-  background-color: #F4B422;
+.titul {
+  background-color: #f4b422;
   width: 60%;
   border-radius: 2rem 2rem 1rem 1rem;
   border: 1px solid rgba(0, 0, 0, 0.233);

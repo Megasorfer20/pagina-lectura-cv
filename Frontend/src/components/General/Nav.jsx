@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Logo from '../../logo-vertical-campus.png';
-import Login from './Login';
-import './Nav.css';
+import React, { useState } from "react";
+import Logo from "../../logo-vertical-campus.png";
+import Login from "./Login";
+import "./Nav.css";
 
 const Nav = () => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);

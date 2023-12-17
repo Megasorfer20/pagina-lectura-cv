@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import ModalDescripAdmin from './ModalDescripAdmin';
-import Carga from '../Carga';
+import React, { useState, useEffect, useMemo } from "react";
+import ModalDescripAdmin from "./ModalDescripAdmin";
+import Carga from "../Carga";
 
 const CardsAdmin = ({ filtro }) => {
   const [campers, setCampers] = useState([]);
@@ -12,12 +12,12 @@ const CardsAdmin = ({ filtro }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/API/campers');
+        const response = await fetch("http://localhost:5000/API/campers");
         const data = await response.json();
         setCampers(data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching campers:', error);
+        console.error("Error fetching campers:", error);
         setLoading(false);
       }
     };
@@ -43,13 +43,18 @@ const CardsAdmin = ({ filtro }) => {
     return campers.filter((camper) => {
       return (
         (!filtro.especialidad ||
-          camper.especiality.toLowerCase() === filtro.especialidad.toLowerCase()) &&
-        (!filtro.pais || camper.locality.toLowerCase() === filtro.pais.toLowerCase()) &&
+          camper.especiality.toLowerCase() ===
+            filtro.especialidad.toLowerCase()) &&
+        (!filtro.pais ||
+          camper.locality.toLowerCase() === filtro.pais.toLowerCase()) &&
         (!filtro.programmerType ||
-          camper.programmerType.toLowerCase() === filtro.programmerType.toLowerCase()) &&
+          camper.programmerType.toLowerCase() ===
+            filtro.programmerType.toLowerCase()) &&
         (!filtro.nivelIngles ||
-          camper.englishLevel.toLowerCase() === filtro.nivelIngles.toLowerCase()) &&
-        (!filtro.seniority || camper.seniority.toLowerCase() === filtro.seniority.toLowerCase())
+          camper.englishLevel.toLowerCase() ===
+            filtro.nivelIngles.toLowerCase()) &&
+        (!filtro.seniority ||
+          camper.seniority.toLowerCase() === filtro.seniority.toLowerCase())
       );
     });
   }, [campers, filtro]);
@@ -70,7 +75,11 @@ const CardsAdmin = ({ filtro }) => {
               <div className="encabezado">
                 <p className="name">{`${camper.name} ${camper.lastName}`}</p>
               </div>
-              <img className="avatar" src={`data:image/png;base64,${camper.photo}`} alt="" />
+              <img
+                className="avatar"
+                src={`data:image/png;base64,${camper.photo}`}
+                alt=""
+              />
               <p className="enfoque">{camper.especiality}</p>
               <div className="valorr">
                 <div className="center valorcontent">
@@ -98,7 +107,9 @@ const CardsAdmin = ({ filtro }) => {
             </div>
             <button
               className="detalles"
-              onClick={() => toggleModal(camper._id, camper.name, camper.lastName)}
+              onClick={() =>
+                toggleModal(camper._id, camper.name, camper.lastName)
+              }
             >
               Detalles
             </button>
@@ -108,7 +119,7 @@ const CardsAdmin = ({ filtro }) => {
         <div className="notfund">
           <Carga />
           <div className="textFilter">
-            Houston no se encontró ningún camper {''.repeat(dotsCount)}
+            Houston no se encontró ningún camper {"".repeat(dotsCount)}
           </div>
         </div>
       )}
