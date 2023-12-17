@@ -36,7 +36,17 @@ Las claves de inicio de sesión a usar son las siguientes:
         - Usuario: ${newUserEMail}
         - Contraseña: ${newUserPassword}
 `,
-      html: "<p>Zuluaga, debes hacer el front de esto XD</p><br/><p>Debes pasar el menasje de arriba a HTML y luego borras el de arriba</p>",
+      html: `<h1>Zuluaga, debes hacer el front de esto XD</h1><br/><h1>Debes pasar el menasje de arriba a HTML y luego borras el de arriba</h1><br/>
+      <p>
+      Hola Estimado Camper ${newUserName},
+
+es de nuestro agrado informar que tu CV ha sido añadido a nuestra página, para estár al tanto de sus actualizaciones o pedir cambios a tu usuario te reccomendamos iniciar sesión en nuestra página (URL DE LA PÁGINA)
+
+Las claves de inicio de sesión a usar son las siguientes:
+
+        - Usuario: ${newUserEMail}
+        - Contraseña: ${newUserPassword}
+      </p>`,
     });
   } catch (error) {
     console.log(error);

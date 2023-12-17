@@ -1,4 +1,6 @@
+import bcryptjs from "bcryptjs";
 import { conection, client } from "../database/dbconection.js";
+import { generatePassword } from "../recurses/passwordGenerator.js";
 
 export const postsControllers = async (req, res) => {
   try {
@@ -92,17 +94,28 @@ const postCampersDetails = async (dataEntered) => {
 
 const postUsers = async (dataEntered) => {
   try {
-    const { username, email, password, usertype } = dataEntered;
+    const { username, email, usertype } = dataEntered;
+
+    const password = generatePassword(10) 
+
+    const salt = bcryptjs.genSaltSync()
+
+    const newGenPass = bcryptjs.hashSync(password,salt)
+
+    await trasporterFunction('sbstzuluaga@gmail.com', "Sebastian Zuluaga","SoyUnaContraseñaSegura");
+    data = {message: "El correo se envio exitosamente"}
+
     const data = {
       username,
       email,
-      password,
+      password: newGenPass,
       usertype,
       status: true,
     };
     const usersDB = (await conection()).users;
-    await usersDB.insertOne(data);
-    return { message: "user ingresado con éxito" };
+    const newUser = await usersDB.insertOne(data);
+    //return { message: "user ingresado con éxito" };
+    return newUser;
   } catch (error) {
     return error;
   }
