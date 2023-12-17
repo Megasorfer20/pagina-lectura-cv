@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import General from './components/General/General';
 import Filtro from './components/Filtro';
 import Cards from './components/Cards';
+import Astronautas from './components/General/Astronautas';
 import './App.css';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Cards filtro={filtro} />
       </header>
       <Footer />
+      <Astronautas></Astronautas>
     </div>
   );
 }

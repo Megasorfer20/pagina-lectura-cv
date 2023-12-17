@@ -1,7 +1,22 @@
 .App {
   text-align: center;
-  overflow: none; /* Add this line to set the overflow property */
+  position: relative;
+  background-color: #5E3AE2;
+  z-index: 1; 
 }
+
+.App::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.544) 0%, rgba(255, 255, 255, 0) 70%);
+  z-index: -1;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -10,7 +25,7 @@
 }
 
 .App-header {
-  background-color: #5E3AE2;
+  
   min-height: 140vh;
   display: flex;
   flex-direction: column;
@@ -18,7 +33,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  overflow: none; /* Add this line to set the overflow property for .App-header */
+ 
 }
 
 
