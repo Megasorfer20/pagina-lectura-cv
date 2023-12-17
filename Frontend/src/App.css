@@ -2,19 +2,16 @@
   text-align: center;
   position: relative;
   background-color: #5E3AE2;
+  width: 100%;
   z-index: 1; 
 }
 
-.App::before {
-  content: "";
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.544) 0%, rgba(255, 255, 255, 0) 70%);
-  z-index: -1;
+.centro{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 

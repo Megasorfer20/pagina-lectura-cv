@@ -12,6 +12,24 @@
   .formulario h1 {
     text-align: center; /* Alinea el título al centro */
   }
+
+
+  .telefono-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    
+  }
+  
+  .telefono-container select{
+    width: 17.5%;
+  }
+  
+  .telefono-container input {
+    width: 71.5%; /* Ancho deseado para el select e input */
+  }
   
   label {
     text-align: start;
@@ -74,6 +92,7 @@
     .formulario {
       max-width: 100%;
     }
+
   }
   
   .colorfontt {

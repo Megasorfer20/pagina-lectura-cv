@@ -8,6 +8,7 @@ const Formulario = () => {
     telefono: '',
     correo: '',
     descripcion: '',
+    codigoPais: '+57', // Código de país por defecto (Colombia)
   });
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -26,7 +27,8 @@ const Formulario = () => {
       formData.empresa === '' ||
       formData.telefono === '' ||
       formData.correo === '' ||
-      formData.descripcion === ''
+      formData.descripcion === '' ||
+      formData.codigoPais === ''
     ) {
       // Si ya hay un mensaje de error, mantenerlo
       if (!errorMessage) {
@@ -60,6 +62,21 @@ const Formulario = () => {
     };
   }, []);
 
+  // Lista de códigos de país
+  const codigosPais = [
+      { codigo: '+57', pais: 'Colombia' },
+      { codigo: '+1', pais: 'Estados Unidos' },
+      { codigo: '+44', pais: 'Reino Unido' },
+      { codigo: '+33', pais: 'Francia' },
+      { codigo: '+49', pais: 'Alemania' },
+      { codigo: '+81', pais: 'Japón' },
+      { codigo: '+86', pais: 'China' },
+      { codigo: '+91', pais: 'India' },
+      { codigo: '+52', pais: 'México' },
+      { codigo: '+55', pais: 'Brasil' },
+      { codigo: '+34', pais: 'España' },
+  ];
+
   return (
     <div className="center colorfontt">
       <form className="formulario" onSubmit={handleSubmit}>
@@ -77,9 +94,22 @@ const Formulario = () => {
         </label>
 
         <label>
-        <h3>Número de Teléfono:</h3>
-          <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} />
-        </label>
+  <h3>Número de Teléfono:</h3>
+  <div className='center telefono-container'>
+    <select name="codigoPais" value={formData.codigoPais} onChange={handleChange}>
+      {codigosPais.map((codigo) => (
+        <option key={codigo.codigo} value={codigo.codigo}>
+          {codigo.pais} ({codigo.codigo})
+        </option>
+      ))}
+    </select>
+    <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} />
+  </div>
+</label>
+        
+          
+          
+        
 
         <label>
          <h3> Correo:</h3>

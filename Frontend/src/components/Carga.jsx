@@ -19,12 +19,12 @@ const Carga = () => {
   return (
     <div>
       {cargando ? (
-        <div>
+        <div className='centro'>
         <div className="spinner"></div>
         <img className='imaget' src={Logo} alt="Logo" />
         </div>
       ) : (
-        <div>
+        <div div className='centro'>
          <div className="spinner"></div>
         <img className='suave' src={AstroF} alt="Logo" />
         </div>

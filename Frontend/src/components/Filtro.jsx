@@ -66,7 +66,6 @@ const Filtro = ({ onFilterChange }) => {
               {options.especialidades.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
-              
             </select>
           </div>
           <div>
@@ -78,7 +77,6 @@ const Filtro = ({ onFilterChange }) => {
               {options.paises.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
-              
             </select>
           </div>
           <div>
@@ -90,20 +88,18 @@ const Filtro = ({ onFilterChange }) => {
               {options.programmerTypes.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
-              
             </select>
           </div>
           <div>
-          <select
-  value={filtro.nivelIngles}
-  onChange={(e) => handleInputChange('nivelIngles', e.target.value)}
->
-  <option value="">Nivel de Inglés</option>
-  {options.nivelesIngles.map((option, index) => (
-    <option key={index} value={option}>{option}</option>
-  ))}
-  
-</select>
+            <select
+              value={filtro.nivelIngles}
+              onChange={(e) => handleInputChange('nivelIngles', e.target.value)}
+            >
+              <option value="">Nivel de Inglés</option>
+              {options.nivelesIngles.map((option, index) => (
+                <option key={index} value={option}>{option}</option>
+              ))}
+            </select>
           </div>
           <div>
             <select
@@ -114,7 +110,6 @@ const Filtro = ({ onFilterChange }) => {
               {options.seniorities.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
-              
             </select>
           </div>
           <div>
