@@ -1,4 +1,6 @@
 import { conection, client } from "../database/dbconection.js";
+import { trasporterFunction } from "../recurses/mailer.js";
+
 
 export const getsControllers = async (req, res) => {
   try {
@@ -21,6 +23,10 @@ export const getsControllers = async (req, res) => {
         break;
       case "programingLaguage":
         data = await getProgramingLanguage();
+        break;
+        case "testEmails":
+         await trasporterFunction('sbstzuluaga@gmail.com', "Sebastian Zuluaga","SoyUnaContraseñaSegura");
+         data = {message: "El correo se envio exitosamente"}
         break;
       default:
         data = { message: "Registro No Encontrado" };
