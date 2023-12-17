@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import ModalDescrip from './ModalDescrip';
-import monitorImage from '../monitor.png';
-import globalImage from '../global.png';
 import Carga from './Carga';
 import './css/Card.css';
 
@@ -10,6 +8,7 @@ const Cards = ({ filtro }) => {
   const [loading, setLoading] = useState(true);
   const [selectedCard, setSelectedCard] = useState({});
   const [dotsCount, setDotsCount] = useState(3);
+  const [filterChangeFlag, setFilterChangeFlag] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +24,7 @@ const Cards = ({ filtro }) => {
     };
 
     fetchData();
-  }, []); // Solo se ejecuta una vez al montar el componente
+  }, [filterChangeFlag]); // Se ejecuta cada vez que filterChangeFlag cambia
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -39,66 +38,81 @@ const Cards = ({ filtro }) => {
     setSelectedCard({ id, title, description });
   };
 
-  const filteredCampers = campers.filter(camper => {
-    return (
-      (!filtro.especialidad || camper.especiality === filtro.especialidad) &&
-      (!filtro.pais || camper.locality === filtro.pais) &&
-      (!filtro.programmerType || camper.programmerType === filtro.programmerType) &&
-      (!filtro.nivelIngles || camper.englishLevel === filtro.nivelIngles) &&
-      (!filtro.seniority || camper.seniority === filtro.seniority)
-    );
-  });
+  // Usar useMemo para crear una clave única basada en el filtro actual
+  const key = useMemo(() => JSON.stringify(filtro), [filtro]);
+  const filteredCampers = useMemo(() => {
+    return campers.filter(camper => {
+      return (
+        (!filtro.especialidad || camper.especiality.toLowerCase() === filtro.especialidad.toLowerCase()) &&
+        (!filtro.pais || camper.locality.toLowerCase() === filtro.pais.toLowerCase()) &&
+        (!filtro.programmerType || camper.programmerType.toLowerCase() === filtro.programmerType.toLowerCase()) &&
+        (!filtro.nivelIngles || camper.englishLevel.toLowerCase() === filtro.nivelIngles.toLowerCase()) &&
+        (!filtro.seniority || camper.seniority.toLowerCase() === filtro.seniority.toLowerCase())
+      );
+    });
+  }, [campers, filtro]);
+
+  useEffect(() => {
+    // Al cambiar el filtro, actualiza el flag para forzar la recarga
+    setFilterChangeFlag(prev => !prev);
+  }, [filtro]);
 
   return (
-    <div className="card-container">
-      {loading && <div className='cargaerror'><Carga></Carga></div>}
-      {!loading && campers.length === 0 && (
-        <p>No results found{'.'.repeat(dotsCount)}</p>
-      )}
-      {!loading && filteredCampers.length > 0 && filteredCampers.map(camper => (
-        <div key={camper._id} className="card">
-               <div className='contenido'>
-            <div className='encabezado'>
+    <div key={key} className="card-container">
+      {loading && <div className='cargaerror'></div>}
+      {!loading && filteredCampers.length > 0 ? (
+        filteredCampers.map((camper, index) => (
+          <div key={`${camper._id}_${index}`} className="card animate">
+            <div className='contenido'>
               <p className='senior'>{camper.seniority}</p>
-              <p className='name'>{`${camper.name} ${camper.lastName}`}</p>
-              <p className='ingles'>{camper.englishLevel}</p>
-            </div>
-            <img
-              className='avatar'
-              src={`data:image/png;base64,${camper.photo}`}
-              alt=''
-            />
-            <p className='enfoque'>{camper.especiality}</p>
-            <div className='carecter'>
-              <ul className='lineal'>
-                {camper.tecnologies.slice(0, 4).map((tech, techIndex) => (
-                  <li key={techIndex}>{tech}</li>
-                ))}
-                {camper.tecnologies.length > 4 && <li>...</li>}
-              </ul>
-              
-              <div className='genera'>
-  <p className='first-background'>
-    <img className='imagenRut' src={monitorImage} alt='Monitor' />
-    {camper.programmerType}
-  </p>
-  <p className='second-background'>
-    <img className='imagenRut' src={globalImage} alt='Global' />
-    {camper.locality}
-  </p>
+              <div className='encabezado'>
+                <p className='name'>{`${camper.name} ${camper.lastName}`}</p>
+              </div>
+              <img
+                className='avatar'
+                src={`data:image/png;base64,${camper.photo}`}
+                alt=''
+              />
+              <p className='enfoque'>{camper.especiality}</p>
+              <div className='valorr'>
+                <div className='center valorcontent'>
+<div className='centerrr'>
+  <span>Nivel de inglés:</span>
+  <span>País:</span>
+  <span>Preferencia salarial:</span>
+</div>
+<div className='centerrr'>
+<div className='result '>{camper.englishLevel}</div>
+<div className='result '>{camper.locality}</div>
+<div className='result '>${camper.salary}</div>
+</div>
+</div>
+  <p className='centerrr lola'><span>Tecnologías:</span></p>
+  <ul className='lineal'>
+    {camper.tecnologies.slice(0, 3).map((tech, techIndex) => (
+      <li key={techIndex}>{tech}</li>
+    ))}
+    {camper.tecnologies.length > 3 && <li>...</li>}
+  </ul>
 </div>
 
             </div>
+            <button
+              className="detalles"
+              onClick={() => toggleModal(camper._id, camper.name, camper.lastName)}
+            >
+              Detalles
+            </button>
           </div>
-          <button
-            className="detalles"
-            onClick={() => toggleModal(camper._id, camper.name, camper.lastName)}
-          >
-            Detalles
-          </button>
-        </div>
-        
-      ))}
+        ))
+      ) : (
+<div className='notfund'>
+ <Carga />
+  <div className='textFilter'>
+  Houston no se encontro ningun camper {''.repeat(dotsCount)}
+  </div>
+</div>
+      )}
       {selectedCard.id && (
         <ModalDescrip
           camperId={selectedCard.id}

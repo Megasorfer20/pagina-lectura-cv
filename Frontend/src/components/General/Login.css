@@ -108,6 +108,7 @@ h3{
 
 .close-button:hover {
   color: red;
+  background-color: white;
   font-size: 24px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 50%;

@@ -1,10 +1,30 @@
 .filtro-container {
-    background-color: #f2f2f2;
-    padding: 5px;
-    border-radius: 8px;
-    color: black;
-    width: 60%;
+  background-color: #f2f2f2;
+  padding: 5px;
+  border-radius: 8px;
+  color: black;
+  width: 60%;
+  position: relative;
+  overflow: hidden;
+  animation: slideAndSwing 2.5s ;
+}
+
+@keyframes slideAndSwing {
+  0%, 100% {
+      transform: translateX(0);
   }
+  25% {
+      transform: translateX(10%);
+  }
+  50% {
+      transform: translateX(-10%);
+  }
+  75% {
+      transform: translateX(0);
+  }
+}
+
+
   
   .filtro-row {
     display: flex;
@@ -17,6 +37,7 @@
     width: 100%;
     padding: 8px;
     margin-bottom: 6px;
+    border-radius: 1rem;
   }
   
   button {

@@ -1,0 +1,152 @@
+.formulario {
+    min-width: 70%;
+    
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
+    background-color: white;
+  }
+  
+  .formulario h1 {
+    text-align: center; /* Alinea el título al centro */
+  }
+  
+  label {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    width: 110%;
+  }
+  
+  h3{
+    text-align: start;
+    padding: 0;
+    margin: 0;
+  }
+  
+  
+  .descripcion {
+    width: 89.5% !important;
+    height: 100px;
+    overflow-y: auto;
+    resize: none;
+    transition: height 0.3s ease;
+    border: 1px solid #ccc;
+    user-select: none;
+  }
+  
+  .descripcion::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .descripcion::-webkit-scrollbar-thumb {
+    background-color: #1b1bacb0;
+    border-radius: 4px;
+  }
+  
+
+  
+  .descripcion-label:hover .descripcion {
+    height: 120px;
+    border: 2px solid #1b1bacb0;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Media query para pantallas más pequeñas */
+  @media screen and (max-width: 600px) {
+    .formulario {
+      max-width: 100%;
+    }
+  }
+  
+  .colorfontt {
+    background-color: #5e3ae2;
+    padding: 5%;
+    margin: 0%;
+    border-radius: 1rem;
+  }
+  
+  @keyframes shakeAnimation {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .shake-animation {
+    animation: shakeAnimation 0.5s ease-in-out;
+  }
+  
+  
+  .error-message {
+    color: #fff;
+    background-color: #e74c3c;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+  
+  .error-message::before,
+  .error-message::after {
+    content: "⚠️";
+    font-size: 1.5em;
+    margin: 0 10px;
+    position: absolute;
+  }
+  
+  .error-message::before {
+    left: 0;
+  }
+  
+  .error-message::after {
+    right: 0;
+  }
+  
+  @media screen and (max-width: 580px) {
+    .error-message::before,
+    .error-message::after {
+      bottom: 6px;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  
+  
+
+    .descripcion {
+        width: 92%;
+    }
+  

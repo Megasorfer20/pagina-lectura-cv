@@ -10,7 +10,7 @@ const Carga = () => {
     const cargarDatos = () => {
       setTimeout(() => {
         setCargando(false);
-      }, 5500); 
+      }, 3000); 
     };
 
     cargarDatos();

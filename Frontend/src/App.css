@@ -1,10 +1,6 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  overflow: none; /* Add this line to set the overflow property */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -22,7 +18,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  overflow: none; /* Add this line to set the overflow property for .App-header */
 }
+
 
 .App-link {
   color: #61dafb;
