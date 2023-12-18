@@ -338,9 +338,9 @@
 }
 
 .notfund {
+  min-height: 500px;
   padding-top: 8%;
   position: relative;
-  height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -349,4 +349,10 @@
 
 .textFilter {
   text-align: center;
+  
+}
+
+.cara{
+  position: absolute;
+  bottom: 1%;
 }

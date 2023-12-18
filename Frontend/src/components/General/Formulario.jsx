@@ -8,7 +8,7 @@ const Formulario = () => {
     telefono: "",
     correo: "",
     descripcion: "",
-    codigoPais: "+57", // Código de país por defecto (Colombia)
+    codigoPais: "+57",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -18,10 +18,9 @@ const Formulario = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación de campos
     if (
       formData.nombre === "" ||
       formData.empresa === "" ||
@@ -30,39 +29,55 @@ const Formulario = () => {
       formData.descripcion === "" ||
       formData.codigoPais === ""
     ) {
-      // Si ya hay un mensaje de error, mantenerlo
       if (!errorMessage) {
         setErrorMessage("Todos los campos deben ser llenados");
       }
-      // Aplicar la animación
       applyAnimation();
     } else {
-      console.log("Datos del formulario:", formData);
-      setErrorMessage("");
+      try {
+        // Realizar la solicitud POST
+        const response = await fetch("http://localhost:5000/API/reqMoreInfo", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        // Verificar el estado de la respuesta
+        if (response.ok) {
+          console.log("Solicitud enviada con éxito");
+          setErrorMessage("");
+        } else {
+          // Si la respuesta no es exitosa, mostrar un mensaje de error
+          const errorData = await response.json();
+          setErrorMessage(errorData.message || "Error en la solicitud");
+          applyAnimation();
+        }
+      } catch (error) {
+        console.error("Error al enviar la solicitud:", error);
+        setErrorMessage("Error en la solicitud");
+        applyAnimation();
+      }
     }
   };
 
   const applyAnimation = () => {
-    // Aplicar la clase de animación al elemento
     const errorMessageElement = document.querySelector(".error-message");
     if (errorMessageElement) {
       errorMessageElement.classList.add("shake-animation");
-
-      // Después de un tiempo, quitar la clase para detener la animación
       setTimeout(() => {
         errorMessageElement.classList.remove("shake-animation");
-      }, 500); // Ajusta el tiempo según tus preferencias
+      }, 500);
     }
   };
 
-  // Efecto secundario para limpiar el mensaje de error al desmontar el componente
   useEffect(() => {
     return () => {
       setErrorMessage("");
     };
   }, []);
 
-  // Lista de códigos de país
   const codigosPais = [
     { codigo: "+57", pais: "Colombia" },
     { codigo: "+1", pais: "Estados Unidos" },
@@ -77,11 +92,12 @@ const Formulario = () => {
     { codigo: "+34", pais: "España" },
   ];
 
+
   return (
     <div className="center colorfontt">
       <form className="formulario" onSubmit={handleSubmit}>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
-        <h1>Formulario</h1>
+        <h1>Mas informacion</h1>
 
         <label>
           <h3>Nombre:</h3>
@@ -127,7 +143,7 @@ const Formulario = () => {
         </label>
 
         <label>
-          <h3> Correo:</h3>
+          <h3>Correo:</h3>
           <input
             type="email"
             name="correo"

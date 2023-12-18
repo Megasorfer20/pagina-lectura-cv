@@ -120,7 +120,7 @@ const PDF = ({ camperDetail, additionalDetails }) => {
 
   return (
     <div>
-      <button style={{ padding: 10, fontSize: 16 }} onClick={generarPDF}>
+      <button className="descraga" style={{ padding: 10, fontSize: 16 }} onClick={generarPDF}>
         Generar PDF
       </button>
     </div>

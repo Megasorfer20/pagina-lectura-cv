@@ -1,4 +1,3 @@
-// Login.jsx
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./Login.css";
@@ -8,19 +7,38 @@ const Login = ({ onClose }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Nuevo estado para el estado de autenticación
   const history = useHistory();
 
   const handleLogin = (e) => {
-    e.preventDefault(); // Evita la recarga de la página
+    e.preventDefault();
+
     if (!username || !password) {
       setErrorMessage("Por favor, completa todos los campos.");
     } else {
       // Lógica de autenticación simulada
+      if (username === "usuario1" && password === "contrasena1") {
+        // Actualiza el estado de autenticación
+        setIsLoggedIn(true);
 
-      // Navegar a la ruta deseada después de autenticar con éxito
-      history.push("/admin"); // Reemplaza '/admin' con la ruta que deseas
+        // Redirige a la ruta de administrador si las credenciales son correctas
+        history.push("/admin");
+      } else if (username === "usuario2" && password === "contrasena2") {
+        // Actualiza el estado de autenticación
+        setIsLoggedIn(true);
+
+        // Redirige a la ruta de camper si las credenciales son correctas
+        history.push("/camper");
+      } else {
+        setErrorMessage("Credenciales incorrectas. Intenta de nuevo.");
+      }
     }
   };
+
+  // Cierra el modal cuando el usuario esté autenticado
+  if (isLoggedIn) {
+    onClose();
+  }
 
   return (
     <div className="modal">

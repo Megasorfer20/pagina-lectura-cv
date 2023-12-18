@@ -136,13 +136,14 @@ const ModalDescrip = ({ camperId, onClose }) => {
             ) : (
               <div className="modal-content2">
                 <div className="cerraDec">
+                   
                   <PDF
                     camperDetail={camperDetail}
                     additionalDetails={additionalDetails}
-                  />
+                  /><div className="end">
                   <button className="butXD" onClick={onClose}>
                     X
-                  </button>
+                  </button></div>
                 </div>
                 <div className="super">
                   <div className="tituloeimagen">

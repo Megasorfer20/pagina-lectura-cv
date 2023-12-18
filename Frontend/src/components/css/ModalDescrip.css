@@ -68,9 +68,9 @@
 }
 
 .textoError {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
+position: absolute;
+top: 62%;
+left: 36.5%;
 }
 
 .botonERR {
@@ -81,8 +81,7 @@
 }
 
 .contenidoError {
-  background-color: white;
-  border-radius: 50%;
+  border-radius: 5%;
 }
 
 .cerraDec {
@@ -95,6 +94,12 @@
   padding-right: 2%;
   background-color: #5e3ae2;
   border-radius: 1rem 1rem 0rem 0rem;
+}
+
+.end{
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 2%;
 }
 
 .imagenDetalles {
@@ -141,9 +146,7 @@
     display: none;
   }
 
-  .cerraDec {
-    justify-content: space-around;
-  }
+  
 }
 
 @keyframes aparecerDesdeAbajo {
@@ -357,6 +360,9 @@ h4 {
 }
 
 .descraga {
-  margin-right: 2%;
   background-color: #f45622;
+}
+
+.descraga:hover{
+  background-color: #f67246;
 }

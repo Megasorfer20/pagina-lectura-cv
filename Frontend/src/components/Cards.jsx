@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import ModalDescrip from "./ModalDescrip";
+import Prede from "../prede.jpg";
 import Carga from "./Carga";
 import "./css/Card.css";
 
@@ -65,6 +66,8 @@ const Cards = ({ filtro }) => {
     setFilterChangeFlag((prev) => !prev);
   }, [filtro]);
 
+  const DEFAULT_IMAGE_URL = {Prede};
+
   return (
     <div key={key} className="card-container">
       {loading && <div className="cargaerror"></div>}
@@ -80,6 +83,9 @@ const Cards = ({ filtro }) => {
                 className="avatar"
                 src={`data:image/png;base64,${camper.photo}`}
                 alt=""
+                onError={(e) => {
+                  e.target.src = DEFAULT_IMAGE_URL;
+                }}
               />
               <p className="enfoque">{camper.especiality}</p>
               <div className="valorr">
@@ -118,9 +124,11 @@ const Cards = ({ filtro }) => {
         ))
       ) : (
         <div className="notfund">
-          <Carga />
+          <div className="cara">
+            <Carga />
+          </div>
           <div className="textFilter">
-            Houston no se encontro ningun camper {"".repeat(dotsCount)}
+            Houston no se encontro ningun camper {".".repeat(dotsCount)}
           </div>
         </div>
       )}

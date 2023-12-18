@@ -37,7 +37,7 @@ const NavAdmin = () => {
         <div className="login-container">
           <Link
             to="/admin/notificaciones"
-            className="login-btn"
+            className="login-btn notion"
             style={{ textDecoration: "none" }}
             onClick={handleNotificacionesClick}
           >
@@ -45,7 +45,7 @@ const NavAdmin = () => {
           </Link>
           <Link
             to="/admin"
-            className="login-btn"
+            className="login-btn camper"
             style={{ textDecoration: "none" }}
             onClick={handleAdminClick}
           >
@@ -53,7 +53,7 @@ const NavAdmin = () => {
           </Link>
           <Link
             to="/"
-            className="login-btn"
+            className="login-btn irse"
             style={{ textDecoration: "none" }}
             onClick={handleLogout}
           >

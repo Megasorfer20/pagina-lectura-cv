@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './components/General/Nav';
@@ -9,6 +8,7 @@ import Cards from './components/Cards';
 import Astronautas from './components/General/Astronautas';
 import Admin from './components/VistaAdmin/Admin';
 import Carga from './components/Carga';
+import Camper from './components/VistaCamper/Camper';
 
 import './App.css';
 
@@ -38,22 +38,26 @@ function App() {
 
   return (
     <Router>
-      <Switch>
-        <Route path="/admin">
-          {mostrarCarga ? (
-            <div className='centro'>
-              <Carga />
-            </div>
-          ) : (
-            <Admin />
-          )}
-        </Route>
-        <Route path="/" exact>
-          {mostrarCarga ? (
-            <Carga />
-          ) : (
-            <div className="App">
-              <Nav />
+      {mostrarCarga ? (
+        <div className="centro">
+          <Carga />
+        </div>
+      ) : (
+      
+         
+          
+          <Switch>
+            <Route path="/admin">
+              {/* Renderiza el componente Admin solo en la ruta /admin */}
+              <Admin />
+            </Route>
+            <Route path="/camper" exact>
+              {/* Renderiza el componente Camper solo en la ruta /camper */}
+              <Camper />
+            </Route>
+            <Route path="/" exact>
+              
+             <div className='App'><Nav />
               <header className="App-header">
                 <General />
                 <br />
@@ -62,10 +66,11 @@ function App() {
                 <Footer />
                 <Astronautas />
               </header>
-            </div>
-          )}
-        </Route>
-      </Switch>
+              </div>
+            </Route>
+          </Switch>
+       
+      )}
     </Router>
   );
 }
