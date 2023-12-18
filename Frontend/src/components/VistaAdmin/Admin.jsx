@@ -1,20 +1,20 @@
-// Admin.js
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import NavAdmin from './NavAdmin';
-import Footer from '../Footer';
-import Filtro from '../Filtro';
-import CardsAdmin from './CardsAdmin';
-import Edit from './Edit';
-import './Admin.css';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import NavAdmin from "./NavAdmin";
+import Footer from "../Footer";
+import Filtro from "../Filtro";
+import CardsAdmin from "./CardsAdmin";
+import Astronautas from "../General/Astronautas";
+import Edit from "./Edit";
+import "./Admin.css";
 
 const Admin = () => {
   const [filtro, setFiltro] = useState({
-    especialidad: '',
-    pais: '',
-    programmerType: '',
-    nivelIngles: '',
-    seniority: '',
+    especialidad: "",
+    pais: "",
+    programmerType: "",
+    nivelIngles: "",
+    seniority: "",
   });
 
   const handleFilterChange = (filtro) => {
@@ -36,18 +36,20 @@ const Admin = () => {
               <h2>Contenido de Notificaciones</h2>
             </Route>
             <Route path="/admin/editar/:camperId">
-            <Edit />
+              <Edit />
             </Route>
 
             <Route path="/admin">
               <div className="mesajeAdd">
                 <h2>Bienvenido a tu Panel de Administrador.</h2>
                 <p>
-                  Aquí puedes gestionar la información de campers en nuestra comunidad. Realiza las siguientes acciones:
+                  Aquí puedes gestionar la información de campers en nuestra
+                  comunidad. Realiza las siguientes acciones:
                 </p>
                 <ul className="action-list">
                   <li>
-                    <strong>Editar:</strong> Actualiza detalles de campers existentes.
+                    <strong>Editar:</strong> Actualiza detalles de campers
+                    existentes.
                   </li>
                   <li>
                     <strong>Eliminar:</strong> Retira información obsoleta.
@@ -56,11 +58,15 @@ const Admin = () => {
                     <strong>Subir:</strong> Añade nuevos campers.
                   </li>
                   <li>
-                    <strong>Notificaciones:</strong> Recibe alertas de cambios y publicaciones.
+                    <strong>Notificaciones:</strong> Recibe alertas de cambios y
+                    publicaciones.
                   </li>
                 </ul>
-                <p>Gracias por tu dedicación al mantener nuestra plataforma actualizada.</p>
-                </div>
+                <p>
+                  Gracias por tu dedicación al mantener nuestra plataforma
+                  actualizada.
+                </p>
+              </div>
               <Filtro onFilterChange={handleFilterChange} />
               <CardsAdmin filtro={filtro} />
             </Route>
@@ -68,6 +74,7 @@ const Admin = () => {
         </Router>
       </div>
       <Footer />
+      <Astronautas></Astronautas>
     </div>
   );
 };

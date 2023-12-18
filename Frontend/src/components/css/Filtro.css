@@ -6,66 +6,64 @@
   width: 60%;
   position: relative;
   overflow: hidden;
-  animation: slideAndSwing 2.5s ;
+  animation: slideAndSwing 2.5s;
 }
 
 @keyframes slideAndSwing {
-  0%, 100% {
-      transform: translateX(0);
+  0%,
+  100% {
+    transform: translateX(0);
   }
   25% {
-      transform: translateX(10%);
+    transform: translateX(10%);
   }
   50% {
-      transform: translateX(-10%);
+    transform: translateX(-10%);
   }
   75% {
-      transform: translateX(0);
+    transform: translateX(0);
   }
 }
 
+.filtro-row {
+  display: flex;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+}
 
-  
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 6px;
+  border-radius: 1rem;
+}
+
+button {
+  background-color: #00aa80;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
   .filtro-row {
-    display: flex;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-around;
+    flex-direction: column;
   }
-  
-  select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 6px;
-    border-radius: 1rem;
+  .filtro-container {
+    width: 50%;
   }
-  
-  button {
-    background-color: #00AA80;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  @media (max-width: 768px) {
-    .filtro-row {
-      flex-direction: column;
-    }
-    .filtro-container{
-        width: 50%;
-    }
-  }
-  
-  @media (max-width: 1300px) {
-    .filtro-container{
-        width: 80%;
-    }
-  }
+}
 
-  @media (max-width: 796px) {
-    .filtro-container{
-        width: 80%;
-    }
+@media (max-width: 1300px) {
+  .filtro-container {
+    width: 80%;
   }
-  
+}
+
+@media (max-width: 796px) {
+  .filtro-container {
+    width: 80%;
+  }
+}
