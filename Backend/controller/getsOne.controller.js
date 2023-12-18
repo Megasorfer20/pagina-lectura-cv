@@ -44,7 +44,7 @@ const getCampers = async (identifier) => {
   try {
     const campersDB = (await conection()).campers;
     const campers = await campersDB
-      .find({ _id: identifier, status: true })
+      .findOne({ _id: identifier, status: true })
       .toArray();
     return campers;
   } catch (error) {
@@ -56,7 +56,7 @@ const getCampersDetails = async (identifier) => {
   try {
     const campersDetailDB = (await conection()).campersDetails;
     const campersDetail = await campersDetailDB
-      .find({ _id: identifier, status: true })
+      .findOne({ _id: identifier, status: true })
       .toArray();
     return campersDetail;
   } catch (error) {
@@ -68,7 +68,7 @@ const getCampersDetailsbyCamperId = async (identifier) => {
   try {
     const campersDetailDB = (await conection()).campersDetails;
     const campersDetail = await campersDetailDB
-      .find({ camper: identifier, status: true })
+      .findOne({ camper: identifier, status: true })
       .toArray();
     return campersDetail;
   } catch (error) {
@@ -80,7 +80,7 @@ const getUsers = async (identifier) => {
   try {
     const usersDB = (await conection()).users;
     const users = await usersDB
-      .find({ _id: identifier, status: true })
+      .findOne({ _id: identifier, status: true })
       .toArray();
     return users;
   } catch (error) {
@@ -92,7 +92,7 @@ const getUsersType = async (identifier) => {
   try {
     const usersTypeDB = (await conection()).usersType;
     const usersType = await usersTypeDB
-      .find({ _id: identifier, status: true })
+      .findOne({ _id: identifier, status: true })
       .toArray();
     return usersType;
   } catch (error) {
@@ -104,7 +104,7 @@ const getProgramingLanguage = async (identifier) => {
   try {
     const programingLaguageDB = (await conection()).programingLaguage;
     const programingLaguage = await programingLaguageDB
-      .find({ _id: identifier, status: true })
+      .findOne({ _id: identifier, status: true })
       .toArray();
     return programingLaguage;
   } catch (error) {

@@ -2,7 +2,7 @@ import bcryptjs from "bcryptjs";
 import { conection, client } from "../database/dbconection.js";
 import { generatePassword } from "../recurses/passwordGenerator.js";
 import { ObjectId } from "mongodb";
-import { trasporterFunction } from "../recurses/mailer.js";
+import { chechInfoFunction, trasporterFunction } from "../recurses/mailer.js";
 
 export const postsControllers = async (req, res) => {
   try {
@@ -27,13 +27,16 @@ export const postsControllers = async (req, res) => {
           message.username,
           message.password
         );
-        message = message.message
+        message = message.message;
         break;
       case "usersType":
         message = await postUsersType(data);
         break;
       case "programingLaguage":
         message = await postProgramingLanguage(data);
+        break;
+      case "reqMoreInfo":
+        message = await postReqMoreInfo(data);
         break;
       default:
         message = { message: "Registro No Encontrado" };
@@ -89,10 +92,10 @@ const postCampersDetails = async (dataEntered) => {
   try {
     const { camper, biography, stack, experiencie, softSkills } = dataEntered;
 
-    const parsedCamperid = new ObjectId( camper)
+    const parsedCamperid = new ObjectId(camper);
 
     const data = {
-      camper: parsedCamperid ,
+      camper: parsedCamperid,
       biography,
       stack,
       experiencie,
@@ -169,6 +172,41 @@ const postProgramingLanguage = async (dataEntered) => {
     const programingLaguageDB = (await conection()).programingLaguage;
     await programingLaguageDB.insertOne(data);
     return { message: "tecnología ingresada con éxito" };
+  } catch (error) {
+    return error;
+  }
+};
+
+const postReqMoreInfo = async (dataEntered) => {
+  try {
+    const {
+      name,
+      enterprise,
+      phonePreposition,
+      phoneNum,
+      email,
+      description,
+      camperId,
+    } = dataEntered;
+
+    const parsedCamperId = new ObjectId(camperId);
+    const data = {
+      name,
+      enterprise,
+      phonePreposition,
+      phoneNum,
+      email,
+      description,
+      tittle: "Solicitud de Información de Camper",
+      type: `El usuario ${name}  de la empresa ${enterprise} ha solicitado información sobre un camper`,
+      camperId: parsedCamperId,
+      read: false,
+      status: true,
+    };
+    chechInfoFunction(data);
+    const notificationsDB = (await conection()).notifications;
+    await notificationsDB.insertOne(data);
+    return { message: "Notificacion ingresado con éxito" };
   } catch (error) {
     return error;
   }

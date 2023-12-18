@@ -15,13 +15,14 @@ const client = new MongoClient(`${url1}${user}:${password}@${cluster}${url2}/`);
 const conection = async () => {
   try {
     await client.connect();
-    const db = await client.db(dbkey);
+    const db = client.db(dbkey);
     const colections = {
       campers: db.collection("campers"),
       campersDetails: db.collection("campersDetails"),
       programingLaguage: db.collection("programingLaguages"),
       usersType: db.collection("usersTypes"),
       users: db.collection("users"),
+      notifications: db.collection("notifications"),
     };
     console.log(`Conección exitosa`);
     return colections;
