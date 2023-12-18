@@ -13,7 +13,7 @@ export const getsOneControllers = async (req, res) => {
       case "campers":
         data = await getCampers(idParse);
         break;
-      case "camperDetail":
+      case "campersDetails":
         data = await getCampersDetails(idParse);
         break;
       case "campersDetailsbyCamper":
@@ -44,7 +44,7 @@ const getCampers = async (identifier) => {
   try {
     const campersDB = (await conection()).campers;
     const campers = await campersDB
-      .findOne({ _id: identifier, status: true })
+      .find({ _id: identifier, status: true })
       .toArray();
     return campers;
   } catch (error) {
@@ -56,7 +56,7 @@ const getCampersDetails = async (identifier) => {
   try {
     const campersDetailDB = (await conection()).campersDetails;
     const campersDetail = await campersDetailDB
-      .findOne({ _id: identifier, status: true })
+      .find({ _id: identifier, status: true })
       .toArray();
     return campersDetail;
   } catch (error) {
@@ -68,7 +68,7 @@ const getCampersDetailsbyCamperId = async (identifier) => {
   try {
     const campersDetailDB = (await conection()).campersDetails;
     const campersDetail = await campersDetailDB
-      .findOne({ camper: identifier, status: true })
+      .find({ camper: identifier, status: true })
       .toArray();
     return campersDetail;
   } catch (error) {
@@ -80,7 +80,7 @@ const getUsers = async (identifier) => {
   try {
     const usersDB = (await conection()).users;
     const users = await usersDB
-      .findOne({ _id: identifier, status: true })
+      .find({ _id: identifier, status: true })
       .toArray();
     return users;
   } catch (error) {
@@ -92,7 +92,7 @@ const getUsersType = async (identifier) => {
   try {
     const usersTypeDB = (await conection()).usersType;
     const usersType = await usersTypeDB
-      .findOne({ _id: identifier, status: true })
+      .find({ _id: identifier, status: true })
       .toArray();
     return usersType;
   } catch (error) {
@@ -104,7 +104,7 @@ const getProgramingLanguage = async (identifier) => {
   try {
     const programingLaguageDB = (await conection()).programingLaguage;
     const programingLaguage = await programingLaguageDB
-      .findOne({ _id: identifier, status: true })
+      .find({ _id: identifier, status: true })
       .toArray();
     return programingLaguage;
   } catch (error) {
