@@ -4,7 +4,7 @@ import { conection, client } from "../database/dbconection.js";
 export const updatesControllers = async (req, res) => {
   try {
     const { colection, id } = req.params;
-    const parsedId = new ObjectId(id)
+    const parsedId = new ObjectId(id);
     const data = req.body;
     let message;
 
@@ -61,7 +61,7 @@ const updateCampers = async (dataEntered, identifier) => {
       photo,
     };
     const campersDB = (await conection()).campers;
-    await campersDB.updateOne({_id:identifier}, {$set: data});
+    await campersDB.updateOne({ _id: identifier }, { $set: data });
     return { message: "camper actaulizado con éxito" };
   } catch (error) {
     console.error(error);
@@ -77,8 +77,8 @@ const updateCampersDetails = async (dataEntered, identifier) => {
       stack,
       experiency,
     };
-    const campersDetailDB = (await conection()).campersDetail;
-    await campersDetailDB.updateOne({_id:identifier}, {$set: data});
+    const campersDetailDB = (await conection()).campersDetails;
+    await campersDetailDB.updateOne({ _id: identifier }, { $set: data });
     return { message: "camper actaulizado con éxito" };
   } catch (error) {
     return error;
@@ -87,15 +87,13 @@ const updateCampersDetails = async (dataEntered, identifier) => {
 
 const updateUsers = async (dataEntered, identifier) => {
   try {
-    const { username, email, password, usertype } = dataEntered;
+    const { username, email } = dataEntered;
     const data = {
       username,
       email,
-      password,
-      usertype,
     };
     const usersDB = (await conection()).users;
-    await usersDB.updateOne({_id:identifier}, {$set: data});
+    await usersDB.updateOne({ _id: identifier }, { $set: data });
     return { message: "user actaulizado con éxito" };
   } catch (error) {
     return error;
@@ -110,7 +108,7 @@ const updateUsersType = async (dataEntered, identifier) => {
       description,
     };
     const usersTypeDB = (await conection()).usersType;
-    await usersTypeDB.updateOne({_id:identifier}, {$set: data});
+    await usersTypeDB.updateOne({ _id: identifier }, { $set: data });
     return { message: "tipo de Usuario actaulizado con éxito" };
   } catch (error) {
     return error;
@@ -125,7 +123,7 @@ const updateProgramingLanguage = async (dataEntered, identifier) => {
       technologyDesccription,
     };
     const programingLaguageDB = (await conection()).programingLaguage;
-    await programingLaguageDB.updateOne({_id:identifier}, {$set: data});
+    await programingLaguageDB.updateOne({ _id: identifier }, { $set: data });
     return { message: "tecnología actaulizado con éxito" };
   } catch (error) {
     return error;

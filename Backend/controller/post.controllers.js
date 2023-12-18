@@ -1,11 +1,16 @@
 import bcryptjs from "bcryptjs";
 import { conection, client } from "../database/dbconection.js";
 import { generatePassword } from "../recurses/passwordGenerator.js";
+import { ObjectId } from "mongodb";
+import { trasporterFunction } from "../recurses/mailer.js";
 
 export const postsControllers = async (req, res) => {
   try {
     const { colection } = req.params;
     const data = req.body;
+
+    console.log(data);
+
     let message;
 
     switch (colection) {
@@ -17,6 +22,12 @@ export const postsControllers = async (req, res) => {
         break;
       case "users":
         message = await postUsers(data);
+        await trasporterFunction(
+          message.email,
+          message.username,
+          message.password
+        );
+        message = message.message
         break;
       case "usersType":
         message = await postUsersType(data);
@@ -76,15 +87,19 @@ const postCampers = async (dataEntered) => {
 
 const postCampersDetails = async (dataEntered) => {
   try {
-    const { biography, stack, experiencie,softSkills } = dataEntered;
+    const { camper, biography, stack, experiencie, softSkills } = dataEntered;
+
+    const parsedCamperid = new ObjectId( camper)
+
     const data = {
+      camper: parsedCamperid ,
       biography,
       stack,
       experiencie,
       softSkills,
       status: true,
     };
-    const campersDetailDB = (await conection()).campersDetail;
+    const campersDetailDB = (await conection()).campersDetails;
     await campersDetailDB.insertOne(data);
     return { message: "camper ingresado con éxito" };
   } catch (error) {
@@ -96,26 +111,32 @@ const postUsers = async (dataEntered) => {
   try {
     const { username, email, usertype } = dataEntered;
 
-    const password = generatePassword(10) 
+    const password = generatePassword(10);
+    console.log(password);
+    const salt = bcryptjs.genSaltSync();
+    const newGenPass = bcryptjs.hashSync(password, salt);
+    console.log(newGenPass);
 
-    const salt = bcryptjs.genSaltSync()
-
-    const newGenPass = bcryptjs.hashSync(password,salt)
-
-    await trasporterFunction('sbstzuluaga@gmail.com', "Sebastian Zuluaga","SoyUnaContraseñaSegura");
-    data = {message: "El correo se envio exitosamente"}
+    const parsedUT = new ObjectId(usertype);
 
     const data = {
       username,
       email,
       password: newGenPass,
-      usertype,
+      usertype: parsedUT,
       status: true,
     };
+    console.log(data);
+
     const usersDB = (await conection()).users;
-    const newUser = await usersDB.insertOne(data);
-    //return { message: "user ingresado con éxito" };
-    return newUser;
+    await usersDB.insertOne(data);
+
+    return {
+      message: "user ingresado con éxito",
+      username: String(data.username),
+      email: String(data.email),
+      password: String(password),
+    };
   } catch (error) {
     return error;
   }

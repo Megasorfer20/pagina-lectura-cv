@@ -3,6 +3,8 @@ import express from "express";
 import cors from "cors";
 import { conection } from "./database/dbconection.js";
 import getsRouter from "./routes/gets.routes.js";
+import bodyParser from "body-parser";
+
 
 config();
 
@@ -19,7 +21,9 @@ export default class Server {
 
   middlewares() {
     this.app.use(cors());
-    this.app.use(express.json());
+    this.app.use(bodyParser.json({limit: '50mb'}))
+    this.app.use(bodyParser.urlencoded({limit: '5mb', extended: true}))
+    // this.app.use(express.json());
     this.app.use(express.static("public"));
   }
 
