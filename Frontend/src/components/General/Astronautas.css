@@ -30,93 +30,84 @@
 
 .astronauta-1 {
   left: 10%;
-  top: -50%; /* Ajusta la posición inicial */
-  width: 15%; /* Ajusta el tamaño según tus preferencias */
-  animation-duration: 12s; /* Ajusta la duración según tus preferencias */
-  animation-timing-function: linear; /* Ajusta la velocidad de rotación */
+  top: -40%;
+  width: 15%;
+  animation-duration: 12s;
+  animation-timing-function: linear;
 }
 
 .astronauta-2 {
   left: 30%;
-  top: -60%; /* Ajusta la posición inicial */
-  width: 10%; /* Ajusta el tamaño según tus preferencias */
-  animation-duration: 15s; /* Ajusta la duración según tus preferencias */
-  animation-timing-function: ease-in-out; /* Ajusta la velocidad de rotación */
+  top: -50%;
+  width: 10%;
+  animation-duration: 15s;
+  animation-timing-function: ease-in-out;
 }
 
 .astronauta-3 {
   left: 50%;
-  top: -55%; /* Ajusta la posición inicial */
-  width: 18%; /* Ajusta el tamaño según tus preferencias */
-  animation-duration: 11s; /* Ajusta la duración según tus preferencias */
-  animation-timing-function: ease-out; /* Ajusta la velocidad de rotación */
+  top: -45%;
+  width: 18%;
+  animation-duration: 11s;
+  animation-timing-function: ease-out;
 }
 
 .astronauta-4 {
   left: 70%;
-  top: -65%; /* Ajusta la posición inicial */
-  width: 12%; /* Ajusta el tamaño según tus preferencias */
-  animation-duration: 14s; /* Ajusta la duración según tus preferencias */
-  animation-timing-function: cubic-bezier(
-    0.68,
-    -0.55,
-    0.27,
-    1.55
-  ); /* Ajusta la velocidad de rotación */
+  top: -55%;
+  width: 12%;
+  animation-duration: 14s;
+  animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 .astronauta-5 {
   left: 70%;
-  top: -58%; /* Ajusta la posición inicial */
-  width: 20%; /* Ajusta el tamaño según tus preferencias */
-  animation-duration: 13s; /* Ajusta la duración según tus preferencias */
-  animation-timing-function: cubic-bezier(
-    0.42,
-    0,
-    0.58,
-    1
-  ); /* Ajusta la velocidad de rotación */
+  top: -48%;
+  width: 20%;
+  animation-duration: 13s;
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
 }
 
 .astronauta-6 {
   left: 15%;
-  top: -62%; /* Ajusta la posición inicial */
+  top: -52%;
   width: 18%;
   animation-duration: 14s;
-  animation-timing-function: ease-in; /* Ajusta la velocidad de rotación */
+  animation-timing-function: ease-in;
 }
 
 .astronauta-7 {
   left: 40%;
-  top: -52%; /* Ajusta la posición inicial */
+  top: -42%;
   width: 12%;
   animation-duration: 11s;
-  animation-timing-function: ease-out; /* Ajusta la velocidad de rotación */
+  animation-timing-function: ease-out;
 }
 
 .astronauta-8 {
   left: 65%;
-  top: -70%; /* Ajusta la posición inicial */
+  top: -60%;
   width: 20%;
   animation-duration: 13s;
-  animation-timing-function: linear; /* Ajusta la velocidad de rotación */
+  animation-timing-function: linear;
 }
 
 .astronauta-9 {
   left: 56%;
-  top: -56%; /* Ajusta la posición inicial */
+  top: -46%;
   width: 15%;
   animation-duration: 16s;
-  animation-timing-function: ease-in-out; /* Ajusta la velocidad de rotación */
+  animation-timing-function: ease-in-out;
 }
 
 .astronauta-10 {
   left: 25%;
-  top: -68%; /* Ajusta la posición inicial */
+  top: -58%;
   width: 14%;
   animation-duration: 15s;
-  animation-timing-function: ease-out; /* Ajusta la velocidad de rotación */
+  animation-timing-function: ease-out;
 }
+
 
 @keyframes fallAndRotate {
   0% {

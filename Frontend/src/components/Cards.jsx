@@ -124,13 +124,15 @@ const Cards = ({ filtro }) => {
         ))
       ) : (
         <div className="notfund">
-          <div className="cara">
-            <Carga />
-          </div>
-          <div className="textFilter">
-            Houston no se encontro ningun camper {".".repeat(dotsCount)}
-          </div>
-        </div>
+    <div className="spinner-container">
+      <div className="cara">
+        <Carga />
+      </div>
+    </div>
+    <div className="textFilter">
+      Houston no se encontró ningún camper {".".repeat(dotsCount)}
+    </div>
+  </div>
       )}
       {selectedCard.id && (
         <ModalDescrip

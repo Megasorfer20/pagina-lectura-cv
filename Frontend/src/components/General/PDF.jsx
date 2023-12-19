@@ -15,14 +15,25 @@ const PDF = ({ camperDetail, additionalDetails }) => {
     const detailStyle = { marginBottom: 5 };
     const listStyle = { marginLeft: 20, marginBottom: 5 };
 
+    // Funciones para mejorar la legibilidad
+    const addTitle = (text, x, y, style = {}) => {
+      pdf.text(text, x, y, { ...titleStyle, ...style });
+    };
+
+    const addList = (items, x, y, style = {}) => {
+      items.forEach((item, index) => {
+        pdf.text(`- ${item}`, x, y + index * 10, { ...listStyle, ...style });
+      });
+    };
+
     // Título
-    pdf.text("Detalles del Camper", 80, 10, titleStyle);
+    addTitle("Detalles del Camper", 80, 10);
 
     // Detalles generales
     const detailsBoxY = 20;
-    const detailsBoxHeight = 7 * 9 + 9; // 7 detalles con altura de línea de 10 y 10 de margen superior
-    pdf.setFillColor(255, 255, 255); // Color blanco para el fondo
-    pdf.setDrawColor(0, 0, 0); // Color negro para el borde
+    const detailsBoxHeight = 7 * 9 + 9;
+    pdf.setFillColor(255, 255, 255);
+    pdf.setDrawColor(0, 0, 0);
     pdf.rect(15, detailsBoxY, 180, detailsBoxHeight, "FD");
 
     const details = [
@@ -51,52 +62,36 @@ const PDF = ({ camperDetail, additionalDetails }) => {
     }
 
     // Tecnologías
-    pdf.text("Tecnologias:", 20, 100);
-    if (
-      additionalDetails.tecnologies &&
-      additionalDetails.tecnologies.length > 0
-    ) {
-      additionalDetails.tecnologies.forEach((tech, index) => {
-        pdf.text(`- ${tech}`, 25, 110 + index * 10, listStyle);
-      });
+    addTitle("Tecnologias:", 20, 100);
+    if (additionalDetails.tecnologies && additionalDetails.tecnologies.length > 0) {
+      addList(additionalDetails.tecnologies, 25, 110);
     }
 
     // Stack
     const stackX = pdf.internal.pageSize.width / 2;
-    pdf.text("Stack:", stackX, 100, titleStyle);
+    addTitle("Stack:", stackX, 100);
     if (camperDetail.stack && camperDetail.stack.length > 0) {
-      camperDetail.stack.forEach((item, index) => {
-        pdf.text(`- ${item}`, stackX + 5, 110 + index * 10, listStyle);
-      });
+      addList(camperDetail.stack, stackX + 5, 110);
     }
 
     // Experiencia
-    pdf.text("Experiencia:", 20, 170);
+    addTitle("Experiencia:", 20, 170);
     if (camperDetail.experiencie && camperDetail.experiencie.length > 0) {
-      camperDetail.experiencie.forEach((item, index) => {
-        pdf.text(`- ${item}`, 25, 180 + index * 10, listStyle);
-      });
+      addList(camperDetail.experiencie, 25, 180);
     }
 
     // Soft Skills a la derecha
     const softSkillsX = pdf.internal.pageSize.width - 60;
     const softSkillsY = 165;
-    pdf.text("Soft Skills:", softSkillsX, softSkillsY - 10, titleStyle);
+    addTitle("Soft Skills:", softSkillsX, softSkillsY - 10);
     if (camperDetail.softSkills && camperDetail.softSkills.length > 0) {
-      camperDetail.softSkills.forEach((item, index) => {
-        pdf.text(
-          `- ${item}`,
-          softSkillsX + 5,
-          softSkillsY + index * 10,
-          listStyle
-        );
-      });
+      addList(camperDetail.softSkills, softSkillsX + 5, softSkillsY);
     }
 
     // Biografía
-    const biografiaTitleY = 215;
-    const biografiaContentY = 225;
-    pdf.text("Biografía:", 20, biografiaTitleY);
+    const biografiaTitleY = 230;
+    const biografiaContentY = 240;
+    addTitle("Biografía:", 20, biografiaTitleY);
     const maxWidth = 160;
 
     if (camperDetail.biography) {
@@ -114,7 +109,6 @@ const PDF = ({ camperDetail, additionalDetails }) => {
       });
     }
 
-    // Guardar el PDF con un nombre específico
     pdf.save("camper_details.pdf");
   };
 

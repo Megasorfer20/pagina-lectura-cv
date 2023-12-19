@@ -53,7 +53,7 @@ const Login = ({ onClose }) => {
 
         <img className="logol" src={Logo} alt="Logo" />
 
-        <form onSubmit={handleLogin}>
+        <form className="centerr" onSubmit={handleLogin}>
           <h3>Usuario:</h3>
           <input
             type="text"
@@ -70,7 +70,7 @@ const Login = ({ onClose }) => {
             required
           />
 
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {errorMessage && <div className="pased"><p className="error-message">{errorMessage}</p></div>}
 
           <div className="pased">
             <button className="ingresa" type="submit">

@@ -336,10 +336,15 @@
     transform: translateX(0);
   }
 }
-
+.textFilter {
+  position: absolute;
+  text-align: center;
+  bottom: 50px;
+  width: 300%;
+  
+}
 .notfund {
-  min-height: 500px;
-  padding-top: 8%;
+  min-height: 400px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -347,12 +352,12 @@
   justify-content: center;
 }
 
-.textFilter {
-  text-align: center;
-  
-}
 
-.cara{
-  position: absolute;
-  bottom: 1%;
+.cara {
+  display: grid;
+  place-items: center;
+  height: 200px; /* Ajusta la altura según sea necesario */
+  background-color: white;
+  border-radius: 50%;
+  padding: 10px;
 }

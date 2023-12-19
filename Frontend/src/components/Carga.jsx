@@ -17,19 +17,19 @@ const Carga = () => {
   }, []);
 
   return (
-    <div>
-      {cargando ? (
-        <div className="centro">
-          <div className="spinner"></div>
-          <img className="imaget" src={Logo} alt="Logo" />
-        </div>
-      ) : (
-        <div div className="centro">
-          <div className="spinner"></div>
-          <img className="suave" src={AstroF} alt="Logo" />
-        </div>
-      )}
-    </div>
+    <div className={cargando ? "centrar" : ""}>
+    {cargando ? (
+      <div>
+        <div className="spinner"></div>
+        <img className="imaget" src={Logo} alt="Logo" />
+      </div>
+    ) : (
+      <div>
+        <div className="spinner"></div>
+        <img className="suave" src={AstroF} alt="Logo" />
+      </div>
+    )}
+  </div>
   );
 };
 

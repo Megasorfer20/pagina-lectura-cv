@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./css/Filtro.css";
 
 const Filtro = ({ onFilterChange }) => {
-  const [filtro, setFiltro] = useState({
-    especialidad: "",
-    pais: "",
-    programmerType: "",
-    nivelIngles: "",
-    seniority: "",
-  });
+  const [especialidad, setEspecialidad] = useState("");
+  const [pais, setPais] = useState("");
+  const [programmerType, setProgrammerType] = useState("");
+  const [nivelIngles, setNivelIngles] = useState("");
+  const [seniority, setSeniority] = useState("");
 
   const [options, setOptions] = useState({
     especialidades: [],
@@ -50,14 +48,36 @@ const Filtro = ({ onFilterChange }) => {
   }, []);
 
   const handleInputChange = (campo, valor) => {
-    setFiltro({
-      ...filtro,
-      [campo]: valor,
-    });
+    switch (campo) {
+      case "especialidad":
+        setEspecialidad(valor);
+        break;
+      case "pais":
+        setPais(valor);
+        break;
+      case "programmerType":
+        setProgrammerType(valor);
+        break;
+      case "nivelIngles":
+        setNivelIngles(valor);
+        break;
+      case "seniority":
+        setSeniority(valor);
+        break;
+      default:
+        break;
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const filtro = {
+      especialidad,
+      pais,
+      programmerType,
+      nivelIngles,
+      seniority,
+    };
     onFilterChange(filtro);
   };
 
@@ -67,10 +87,8 @@ const Filtro = ({ onFilterChange }) => {
         <div className="filtro-row">
           <div>
             <select
-              value={filtro.especialidad}
-              onChange={(e) =>
-                handleInputChange("especialidad", e.target.value)
-              }
+              value={especialidad}
+              onChange={(e) => handleInputChange("especialidad", e.target.value)}
             >
               <option value="">Especialidad</option>
               {options.especialidades.map((option, index) => (
@@ -82,7 +100,7 @@ const Filtro = ({ onFilterChange }) => {
           </div>
           <div>
             <select
-              value={filtro.pais}
+              value={pais}
               onChange={(e) => handleInputChange("pais", e.target.value)}
             >
               <option value="">País</option>
@@ -95,10 +113,8 @@ const Filtro = ({ onFilterChange }) => {
           </div>
           <div>
             <select
-              value={filtro.programmerType}
-              onChange={(e) =>
-                handleInputChange("programmerType", e.target.value)
-              }
+              value={programmerType}
+              onChange={(e) => handleInputChange("programmerType", e.target.value)}
             >
               <option value="">Programmer Type</option>
               {options.programmerTypes.map((option, index) => (
@@ -110,7 +126,7 @@ const Filtro = ({ onFilterChange }) => {
           </div>
           <div>
             <select
-              value={filtro.nivelIngles}
+              value={nivelIngles}
               onChange={(e) => handleInputChange("nivelIngles", e.target.value)}
             >
               <option value="">Nivel de Inglés</option>
@@ -123,7 +139,7 @@ const Filtro = ({ onFilterChange }) => {
           </div>
           <div>
             <select
-              value={filtro.seniority}
+              value={seniority}
               onChange={(e) => handleInputChange("seniority", e.target.value)}
             >
               <option value="">Seniority</option>

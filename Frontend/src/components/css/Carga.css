@@ -1,6 +1,20 @@
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+.centrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .spinner {
-  width: 200px;
-  height: 200px;
+  width: 200px; /* Ajusta según sea necesario */
+  height: 200px; /* Ajusta según sea necesario */
   display: grid;
   border: 4.5px solid #0000;
   border-radius: 50%;

@@ -46,3 +46,14 @@
     transform: rotate(360deg);
   }
 }
+
+.miltt{
+  width: 50%;
+  font-size: small;
+  justify-content: space-between !important;
+}
+
+.miltt h3{
+  margin-left: 50px;
+  text-align: justify;
+}

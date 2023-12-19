@@ -1,0 +1,36 @@
+/* Agrega o ajusta estos estilos en tu archivo CSS existente */
+
+/* Estilos adicionales para el mensaje de éxito */
+.success-message-container {
+  padding: 10px;
+  border: 2px solid green;
+  background-color: #d0f0c0; /* Puedes ajustar este color según tu preferencia */
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
+  border-radius: 1rem;
+}
+
+  
+  .error-message {
+
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .shake-animation {
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25%, 75% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+  }
+  
