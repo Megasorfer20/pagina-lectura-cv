@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import ModalDescripAdmin from "./ModalDescripAdmin";
 import Carga from "../Carga";
+import Prede from "../../prede.jpg";  // Importa la imagen predeterminada
+
 
 const CardsAdmin = ({ filtro }) => {
   const [campers, setCampers] = useState([]);
@@ -64,6 +66,8 @@ const CardsAdmin = ({ filtro }) => {
     setFilterChangeFlag((prev) => !prev);
   }, [filtro]);
 
+  const DEFAULT_IMAGE_URL = Prede;  // Imagen predeterminada
+
   return (
     <div key={key} className="card-container">
       {loading && <div className="cargaerror"></div>}
@@ -79,6 +83,9 @@ const CardsAdmin = ({ filtro }) => {
                 className="avatar"
                 src={`data:image/png;base64,${camper.photo}`}
                 alt=""
+                onError={(e) => {
+                  e.target.src = DEFAULT_IMAGE_URL;
+                }}
               />
               <p className="enfoque">{camper.especiality}</p>
               <div className="valorr">

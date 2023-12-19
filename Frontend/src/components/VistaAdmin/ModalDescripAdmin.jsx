@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import astora from "../../astora.png";
-
 import Carga from "../Carga";
+import Prede from "../../prede.jpg";  // Importa la imagen predeterminada
+
 
 const ModalDescrip = ({ camperId, onClose }) => {
   const [camperDetail, setCamperDetail] = useState({});
@@ -105,6 +106,8 @@ const ModalDescrip = ({ camperId, onClose }) => {
     softSkills = [],
   } = camperDetail;
 
+  const DEFAULT_IMAGE_URL = Prede;  // Imagen predeterminada
+
   return (
     <div className={`modal2${isDarkMode ? " dark-mode" : ""}`}>
       <>
@@ -140,6 +143,9 @@ const ModalDescrip = ({ camperId, onClose }) => {
                         className="imagenDetalles"
                         src={`data:image/png;base64, ${additionalDetails.photo}`}
                         alt="Foto del programador"
+                        onError={(e) => {
+                          e.target.src = DEFAULT_IMAGE_URL;
+                        }}
                       />
                       <div className="tilted-container">
                         <p className="tilted">{`${additionalDetails.name} ${additionalDetails.lastName}`}</p>
