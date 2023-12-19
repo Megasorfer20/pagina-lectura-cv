@@ -47,6 +47,7 @@ Las claves de inicio de sesión a usar son las siguientes:
 export const chechInfoFunction = async (data) => {
   try {
     const idCamper = String(data.camperId);
+
     const response = await fetch(
       `http://localhost:5000/API/campers/${idCamper}`
     );
@@ -58,9 +59,9 @@ export const chechInfoFunction = async (data) => {
       subject: "Nueva solicitud de información de Camper",
       html: `<h1>Zuluaga, debes hacer el front de esto tambien, es un front diferente XD</h1><br/><h1>Debes pasar el menasje de arriba a HTML </h1><br/>
       <p>
-      Hemos recibido una nueva solicitud para saber más información sobre el camper ${info.name} ${info.lastName}, <br/>
+      Hemos recibido una nueva solicitud para saber más información sobre el camper ${info[0].name} ${info[0].lastName}, <br/>
 
-El señor/a ${data.name} representante de la empresa ${data.enterprise} le ha llamado la atención las habilidades del Camper ${info.name} ${info.lastName} y les gustaría tener más informacion sobre él.<br/>
+El señor/a ${data.name} representante de la empresa ${data.enterprise} le ha llamado la atención las habilidades del Camper ${info[0].name} ${info[0].lastName} y les gustaría tener más informacion sobre él.<br/>
 
 Su email de contacto es <strong>${data.email}</strong> y su número telefónico <strong>${data.phonePreposition} ${data.phoneNum}</strong>.  
 
@@ -69,6 +70,8 @@ Los detalles de la consulta que que se ha solicitado es el siguiente: <br/>
 ${data.description}
       </p>`,
     });
+
+    console.log("Seguda verificacion tipo mensaje");
   } catch (error) {
     console.log(error);
   }

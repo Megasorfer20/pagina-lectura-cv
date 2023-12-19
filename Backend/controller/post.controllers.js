@@ -203,9 +203,12 @@ const postReqMoreInfo = async (dataEntered) => {
       read: false,
       status: true,
     };
-    chechInfoFunction(data);
+
+    console.log(data);
     const notificationsDB = (await conection()).notifications;
     await notificationsDB.insertOne(data);
+    await chechInfoFunction(data);
+    console.log("Mensaje Enviasdo con exito");
     return { message: "Notificacion ingresado con éxito" };
   } catch (error) {
     return error;
