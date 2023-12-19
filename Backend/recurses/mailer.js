@@ -27,17 +27,18 @@ export const trasporterFunction = async (
       from: `"CampusLans Admins 💻" <${process.env.EMAIL}>`,
       to: newUserEMail,
       subject: "Bienvenido a nuestra plataforma de CV",
-      html: `<h1>Zuluaga, debes hacer el front de esto XD</h1><br/><h1>Debes pasar el menasje de arriba a HTML y luego borras el de arriba</h1><br/>
-      <p>
-      Hola Estimado Camper ${newUserName},
+      html: `<h3>Hola Estimado Camper ${newUserName},</h3><br/>
+      <p>Es de nuestro agrado informar que tu CV ha sido añadido a nuestra página, para estár al tanto de sus actualizaciones o pedir cambios a tu usuario te reccomendamos iniciar sesión en nuestra página http://localhost:3000</p>
+
       <br/>
-es de nuestro agrado informar que tu CV ha sido añadido a nuestra página, para estár al tanto de sus actualizaciones o pedir cambios a tu usuario te reccomendamos iniciar sesión en nuestra página (URL DE LA PÁGINA)
+      <p>Las claves de inicio de sesión a usar son las siguientes:</p>
+
 <br/>
-Las claves de inicio de sesión a usar son las siguientes:
-<br/>
-        - Usuario: ${newUserEMail}<br/>
-        - Contraseña: ${newUserPassword}
-      </p>`,
+<ul>
+        <li> Usuario: ${newUserEMail} </li>
+        <li> Contraseña: ${newUserPassword} </li>
+        </ul>
+      `,
     });
   } catch (error) {
     console.log(error);
@@ -54,20 +55,18 @@ export const chechInfoFunction = async (data) => {
     const info = await response.json();
 
     await transporter.sendMail({
-      from: `"${data.name} de ${data.enterprise}" <${data.email}>`,
+      from: `"${data.name} de ${data.enterprise}" <${process.env.EMAIL}>`,
       to: process.env.EMAIL,
       subject: "Nueva solicitud de información de Camper",
-      html: `<h1>Zuluaga, debes hacer el front de esto tambien, es un front diferente XD</h1><br/><h1>Debes pasar el menasje de arriba a HTML </h1><br/>
+      html: `<h3>Hemos recibido una nueva solicitud para saber más información sobre el camper ${info[0].name} ${info[0].lastName}, </h3><br/>
       <p>
-      Hemos recibido una nueva solicitud para saber más información sobre el camper ${info[0].name} ${info[0].lastName}, <br/>
+El señor/a ${data.name} representante de la empresa ${data.enterprise} le ha llamado la atención las habilidades del Camper ${info[0].name} ${info[0].lastName} y les gustaría tener más informacion sobre él.</p><br/>
 
-El señor/a ${data.name} representante de la empresa ${data.enterprise} le ha llamado la atención las habilidades del Camper ${info[0].name} ${info[0].lastName} y les gustaría tener más informacion sobre él.<br/>
+<p>Su email de contacto es <strong>${data.email}</strong> y su número telefónico <strong>${data.phonePreposition} ${data.phoneNum}</strong>. </p>  <br/>
 
-Su email de contacto es <strong>${data.email}</strong> y su número telefónico <strong>${data.phonePreposition} ${data.phoneNum}</strong>.  
+<p>Los detalles de la consulta que que se ha solicitado es el siguiente:</p> <br/>
 
-Los detalles de la consulta que que se ha solicitado es el siguiente: <br/>
-
-${data.description}
+<p>${data.description}
       </p>`,
     });
 
