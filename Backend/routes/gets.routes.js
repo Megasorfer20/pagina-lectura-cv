@@ -11,6 +11,6 @@ router.get("/:colection", [], getsControllers);
 router.get("/:colection/:id", [], getsOneControllers);
 router.post("/:colection/", [], postsControllers);
 router.patch("/:colection/:id", [], updatesControllers);
-router.patch("/login", [], loginFunction);
+router.post("/login", [], loginFunction);
 
 export default router;

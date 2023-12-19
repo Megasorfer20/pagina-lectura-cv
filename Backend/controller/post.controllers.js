@@ -17,7 +17,7 @@ export const postsControllers = async (req, res) => {
       case "campers":
         message = await postCampers(data);
         break;
-      case "camperDetail":
+      case "campersDetails":
         message = await postCampersDetails(data);
         break;
       case "users":
@@ -53,7 +53,6 @@ export const postsControllers = async (req, res) => {
 const postCampers = async (dataEntered) => {
   try {
     const {
-      submitedBy,
       name,
       lastName,
       seniority,
@@ -66,7 +65,6 @@ const postCampers = async (dataEntered) => {
       photo,
     } = dataEntered;
     const data = {
-      submitedBy,
       name,
       lastName,
       seniority,

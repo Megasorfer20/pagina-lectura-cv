@@ -12,7 +12,7 @@ export const updatesControllers = async (req, res) => {
       case "campers":
         message = await updateCampers(data, parsedId);
         break;
-      case "camperDetail":
+      case "campersDetails":
         message = await updateCampersDetails(data, parsedId);
         break;
       case "users":
@@ -40,10 +40,11 @@ const updateCampers = async (dataEntered, identifier) => {
   try {
     const {
       name,
+      lastName,
       seniority,
+      programmerType,
       especiality,
       tecnologies,
-      position,
       locality,
       salary,
       englishLevel,
@@ -51,10 +52,11 @@ const updateCampers = async (dataEntered, identifier) => {
     } = dataEntered;
     const data = {
       name,
+      lastName,
       seniority,
+      programmerType,
       especiality,
       tecnologies,
-      position,
       locality,
       salary,
       englishLevel,
@@ -71,12 +73,18 @@ const updateCampers = async (dataEntered, identifier) => {
 
 const updateCampersDetails = async (dataEntered, identifier) => {
   try {
-    const { biography, stack, experiency } = dataEntered;
+    const { camper, biography, stack, experiencie, softSkills } = dataEntered;
+
+    const parsedCamperid = new ObjectId(camper);
+
     const data = {
+      camper: parsedCamperid,
       biography,
       stack,
-      experiency,
+      experiencie,
+      softSkills,
     };
+
     const campersDetailDB = (await conection()).campersDetails;
     await campersDetailDB.updateOne({ _id: identifier }, { $set: data });
     return { message: "camper actaulizado con éxito" };
