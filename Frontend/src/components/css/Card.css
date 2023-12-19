@@ -361,3 +361,13 @@
   border-radius: 50%;
   padding: 10px;
 }
+
+.pagination{
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+.separate{
+  margin: 1%;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import ModalDescrip from "./ModalDescrip";
 import Prede from "../prede.jpg";
 import Carga from "./Carga";
@@ -10,6 +10,10 @@ const Cards = ({ filtro }) => {
   const [selectedCard, setSelectedCard] = useState({});
   const [dotsCount, setDotsCount] = useState(3);
   const [filterChangeFlag, setFilterChangeFlag] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+
+  const cardsContainerRef = useRef();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +29,7 @@ const Cards = ({ filtro }) => {
     };
 
     fetchData();
-  }, [filterChangeFlag]); // Se ejecuta cada vez que filterChangeFlag cambia
+  }, [filterChangeFlag]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -39,22 +43,18 @@ const Cards = ({ filtro }) => {
     setSelectedCard({ id, title, description });
   };
 
-  // Usar useMemo para crear una clave única basada en el filtro actual
   const key = useMemo(() => JSON.stringify(filtro), [filtro]);
   const filteredCampers = useMemo(() => {
     return campers.filter((camper) => {
       return (
         (!filtro.especialidad ||
-          camper.especiality.toLowerCase() ===
-            filtro.especialidad.toLowerCase()) &&
+          camper.especiality.toLowerCase() === filtro.especialidad.toLowerCase()) &&
         (!filtro.pais ||
           camper.locality.toLowerCase() === filtro.pais.toLowerCase()) &&
         (!filtro.programmerType ||
-          camper.programmerType.toLowerCase() ===
-            filtro.programmerType.toLowerCase()) &&
+          camper.programmerType.toLowerCase() === filtro.programmerType.toLowerCase()) &&
         (!filtro.nivelIngles ||
-          camper.englishLevel.toLowerCase() ===
-            filtro.nivelIngles.toLowerCase()) &&
+          camper.englishLevel.toLowerCase() === filtro.nivelIngles.toLowerCase()) &&
         (!filtro.seniority ||
           camper.seniority.toLowerCase() === filtro.seniority.toLowerCase())
       );
@@ -62,17 +62,66 @@ const Cards = ({ filtro }) => {
   }, [campers, filtro]);
 
   useEffect(() => {
-    // Al cambiar el filtro, actualiza el flag para forzar la recarga
     setFilterChangeFlag((prev) => !prev);
   }, [filtro]);
 
-  const DEFAULT_IMAGE_URL = {Prede};
+  const DEFAULT_IMAGE_URL = Prede; // Corregido
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      const currentPosition = window.scrollY;
+      localStorage.setItem("scrollPosition", currentPosition.toString());
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
+    const storedPosition = localStorage.getItem("scrollPosition");
+
+    if (storedPosition) {
+      window.scrollTo({
+        top: parseInt(storedPosition, 10),
+        behavior: "smooth",
+      });
+      localStorage.removeItem("scrollPosition");
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    // Verifica si la referencia existe y tiene una posición
+    if (cardsContainerRef.current && cardsContainerRef.current.offsetTop) {
+      const cardTopPosition = cardsContainerRef.current.offsetTop;
+      const offset = 20; // Ajusta el valor según tus necesidades
+      window.scrollTo({
+        top: cardTopPosition - offset,
+        behavior: "smooth",
+      });
+    }
+  }, [currentPage]);
+
+  // Calcular la cantidad total de páginas
+  const totalPages = Math.ceil(filteredCampers.length / itemsPerPage);
+
+  // Obtener el rango de elementos a mostrar en la página actual
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentCampers = filteredCampers.slice(startIndex, endIndex);
 
   return (
-    <div key={key} className="card-container">
+    <div key={key} className="card-container" ref={cardsContainerRef}>
       {loading && <div className="cargaerror"></div>}
-      {!loading && filteredCampers.length > 0 ? (
-        filteredCampers.map((camper, index) => (
+      {!loading && currentCampers.length > 0 ? (
+        currentCampers.map((camper, index) => (
           <div key={`${camper._id}_${index}`} className="card animate">
             <div className="contenido">
               <p className="senior">{camper.seniority}</p>
@@ -124,21 +173,37 @@ const Cards = ({ filtro }) => {
         ))
       ) : (
         <div className="notfund">
-    <div className="spinner-container">
-      <div className="cara">
-        <Carga />
-      </div>
-    </div>
-    <div className="textFilter">
-      Houston no se encontró ningún camper {".".repeat(dotsCount)}
-    </div>
-  </div>
+          <div className="spinner-container">
+            <div className="cara">
+              <Carga />
+            </div>
+          </div>
+          <div className="textFilter">
+            Houston no se encontró ningún camper {".".repeat(dotsCount)}
+          </div>
+        </div>
       )}
       {selectedCard.id && (
         <ModalDescrip
           camperId={selectedCard.id}
           onClose={() => setSelectedCard({})}
         />
+      )}
+      {/* Paginación */}
+      {filteredCampers.length > itemsPerPage && (
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <div className="separate">
+              <button
+                key={index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+                className={currentPage === index + 1 ? "active" : ""}
+              >
+                {index + 1}
+              </button>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
