@@ -24,7 +24,6 @@ const conection = async () => {
       users: db.collection("users"),
       notifications: db.collection("notifications"),
     };
-    console.log(`Conección exitosa`);
     return colections;
   } catch (error) {
     console.log(error);
