@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import ModalDescripAdmin from "./ModalDescripAdmin";
 import Carga from "../Carga";
-import Prede from "../../prede.jpg";  // Importa la imagen predeterminada
-
+import Prede from "../../prede.jpg";
 
 const CardsAdmin = ({ filtro }) => {
   const [campers, setCampers] = useState([]);
@@ -10,6 +9,8 @@ const CardsAdmin = ({ filtro }) => {
   const [selectedCard, setSelectedCard] = useState({});
   const [dotsCount, setDotsCount] = useState(3);
   const [filterChangeFlag, setFilterChangeFlag] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +26,7 @@ const CardsAdmin = ({ filtro }) => {
     };
 
     fetchData();
-  }, [filterChangeFlag]); // Se ejecuta cada vez que filterChangeFlag cambia
+  }, [filterChangeFlag]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -39,7 +40,6 @@ const CardsAdmin = ({ filtro }) => {
     setSelectedCard({ id, title, description });
   };
 
-  // Usar useMemo para crear una clave única basada en el filtro actual
   const key = useMemo(() => JSON.stringify(filtro), [filtro]);
   const filteredCampers = useMemo(() => {
     return campers.filter((camper) => {
@@ -53,8 +53,7 @@ const CardsAdmin = ({ filtro }) => {
           camper.programmerType.toLowerCase() ===
             filtro.programmerType.toLowerCase()) &&
         (!filtro.nivelIngles ||
-          camper.englishLevel.toLowerCase() ===
-            filtro.nivelIngles.toLowerCase()) &&
+          camper.englishLevel.toLowerCase() === filtro.nivelIngles.toLowerCase()) &&
         (!filtro.seniority ||
           camper.seniority.toLowerCase() === filtro.seniority.toLowerCase())
       );
@@ -62,17 +61,21 @@ const CardsAdmin = ({ filtro }) => {
   }, [campers, filtro]);
 
   useEffect(() => {
-    // Al cambiar el filtro, actualiza el flag para forzar la recarga
     setFilterChangeFlag((prev) => !prev);
   }, [filtro]);
 
-  const DEFAULT_IMAGE_URL = Prede;  // Imagen predeterminada
+  const DEFAULT_IMAGE_URL = Prede;
+
+  const totalPages = Math.ceil(filteredCampers.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentCampers = filteredCampers.slice(startIndex, endIndex);
 
   return (
     <div key={key} className="card-container">
       {loading && <div className="cargaerror"></div>}
       {!loading && filteredCampers.length > 0 ? (
-        filteredCampers.map((camper, index) => (
+        currentCampers.map((camper, index) => (
           <div key={`${camper._id}_${index}`} className="card animate">
             <div className="contenido">
               <p className="senior">{camper.seniority}</p>
@@ -135,6 +138,22 @@ const CardsAdmin = ({ filtro }) => {
           camperId={selectedCard.id}
           onClose={() => setSelectedCard({})}
         />
+      )}
+      {/* Paginación */}
+      {filteredCampers.length > itemsPerPage && (
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <div className="separate">
+              <button
+                key={index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+                className={currentPage === index + 1 ? "active" : ""}
+              >
+                {index + 1}
+              </button>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

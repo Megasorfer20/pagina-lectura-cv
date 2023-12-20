@@ -6,6 +6,7 @@ import Filtro from "../Filtro";
 import CardsAdmin from "./CardsAdmin";
 import Astronautas from "../General/Astronautas";
 import Edit from "./Edit";
+import Notificaciones from "./Notificaciones";
 import "./Admin.css";
 
 const Admin = () => {
@@ -33,7 +34,7 @@ const Admin = () => {
         <Router>
           <Switch>
             <Route path="/admin/notificaciones">
-              <h2>Contenido de Notificaciones</h2>
+              <Notificaciones></Notificaciones>
             </Route>
             <Route path="/admin/editar/:camperId">
               <Edit />

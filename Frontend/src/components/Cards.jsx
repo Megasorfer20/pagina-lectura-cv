@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import ModalDescrip from "./ModalDescrip";
 import Prede from "../prede.jpg";
 import Carga from "./Carga";
@@ -12,8 +12,6 @@ const Cards = ({ filtro }) => {
   const [filterChangeFlag, setFilterChangeFlag] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
-
-  const cardsContainerRef = useRef();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,49 +63,7 @@ const Cards = ({ filtro }) => {
     setFilterChangeFlag((prev) => !prev);
   }, [filtro]);
 
-  const DEFAULT_IMAGE_URL = Prede; // Corregido
-
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      const currentPosition = window.scrollY;
-      localStorage.setItem("scrollPosition", currentPosition.toString());
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
-
-  useEffect(() => {
-    const storedPosition = localStorage.getItem("scrollPosition");
-
-    if (storedPosition) {
-      window.scrollTo({
-        top: parseInt(storedPosition, 10),
-        behavior: "smooth",
-      });
-      localStorage.removeItem("scrollPosition");
-    } else {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    // Verifica si la referencia existe y tiene una posición
-    if (cardsContainerRef.current && cardsContainerRef.current.offsetTop) {
-      const cardTopPosition = cardsContainerRef.current.offsetTop;
-      const offset = 20; // Ajusta el valor según tus necesidades
-      window.scrollTo({
-        top: cardTopPosition - offset,
-        behavior: "smooth",
-      });
-    }
-  }, [currentPage]);
+  const DEFAULT_IMAGE_URL = Prede;
 
   // Calcular la cantidad total de páginas
   const totalPages = Math.ceil(filteredCampers.length / itemsPerPage);
@@ -118,7 +74,7 @@ const Cards = ({ filtro }) => {
   const currentCampers = filteredCampers.slice(startIndex, endIndex);
 
   return (
-    <div key={key} className="card-container" ref={cardsContainerRef}>
+    <div key={key} className="card-container">
       {loading && <div className="cargaerror"></div>}
       {!loading && currentCampers.length > 0 ? (
         currentCampers.map((camper, index) => (
@@ -194,14 +150,13 @@ const Cards = ({ filtro }) => {
         <div className="pagination">
           {Array.from({ length: totalPages }, (_, index) => (
             <div className="separate">
-              <button
-                key={index + 1}
-                onClick={() => setCurrentPage(index + 1)}
-                className={currentPage === index + 1 ? "active" : ""}
-              >
-                {index + 1}
-              </button>
-            </div>
+            <button
+              key={index + 1}
+              onClick={() => setCurrentPage(index + 1)}
+              className={currentPage === index + 1 ? "active" : ""}
+            >
+              {index + 1}
+            </button></div>
           ))}
         </div>
       )}

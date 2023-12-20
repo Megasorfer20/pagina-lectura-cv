@@ -3,7 +3,7 @@ import "./Formulario.css";
 import Valido from "./Valido";
 import Astro from "../../Astro4.png";
 
-const Formulario = () => {
+const Formulario = ({ camperId }) => {
   const [formData, setFormData] = useState({
     name: "",
     enterprise: "",
@@ -11,10 +11,11 @@ const Formulario = () => {
     email: "",
     description: "",
     phonePreposition: "+57",
+    camperId: camperId, // Agrega el campo camperId al estado del formulario
   });
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [isFormValid, setIsFormValid] = useState(false); // New state variable
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,16 +55,17 @@ const Formulario = () => {
           const errorData = await response.json();
           setErrorMessage(errorData.message || "Error en la solicitud");
           applyAnimation();
-          setIsFormValid(false); // Aquí ajustamos el estado en caso de error
+          setIsFormValid(false);
         }
       } catch (error) {
         console.error("Error al enviar la solicitud:", error);
         setErrorMessage("Error en la solicitud");
         applyAnimation();
-        setIsFormValid(false); // Aquí ajustamos el estado en caso de error
+        setIsFormValid(false);
       }
     }
   };
+
   const applyAnimation = () => {
     const errorMessageElement = document.querySelector(".error-message");
     if (errorMessageElement) {
@@ -98,83 +100,83 @@ const Formulario = () => {
     <div className="center colorfontt">
       {isFormValid ? (
         <div className="formi">
-           <img className="altera" src={Astro} alt="" />
-        <Valido />
-        <img src={Astro} alt="" />
+          <img className="altera" src={Astro} alt="" />
+          <Valido />
+          <img src={Astro} alt="" />
         </div>
       ) : (
         <div className="formi">
           <img className="altera" src={Astro} alt="" />
-        <form className="formulario" onSubmit={handleSubmit}>
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
-          <h1 className="titulForm">Mas informacion</h1>
+          <form className="formulario" onSubmit={handleSubmit}>
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
+            <h1 className="titulForm">Mas informacion</h1>
 
-          <label>
-            <h3>Nombre:</h3>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </label>
-
-          <label>
-            <h3>Empresa:</h3>
-            <input
-              type="text"
-              name="enterprise"
-              value={formData.enterprise}
-              onChange={handleChange}
-            />
-          </label>
-
-          <label>
-            <h3>Número de Teléfono:</h3>
-            <div className="center telefono-container">
-              <select
-                name="phonePreposition"
-                value={formData.phonePreposition}
-                onChange={handleChange}
-              >
-                {codigosPais.map((codigo) => (
-                  <option key={codigo.codigo} value={codigo.codigo}>
-                    {codigo.pais} ({codigo.codigo})
-                  </option>
-                ))}
-              </select>
+            <label>
+              <h3>Nombre:</h3>
               <input
-                type="tel"
-                name="phoneNum"
-                value={formData.phoneNum}
+                type="text"
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
               />
-            </div>
-          </label>
+            </label>
 
-          <label>
-            <h3>Correo:</h3>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </label>
+            <label>
+              <h3>Empresa:</h3>
+              <input
+                type="text"
+                name="enterprise"
+                value={formData.enterprise}
+                onChange={handleChange}
+              />
+            </label>
 
-          <label className="descripcion-label">
-            <h3>Descripción:</h3>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              className="descripcion"
-            />
-          </label>
+            <label>
+              <h3>Número de Teléfono:</h3>
+              <div className="center telefono-container">
+                <select
+                  name="phonePreposition"
+                  value={formData.phonePreposition}
+                  onChange={handleChange}
+                >
+                  {codigosPais.map((codigo) => (
+                    <option key={codigo.codigo} value={codigo.codigo}>
+                      {codigo.pais} ({codigo.codigo})
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="tel"
+                  name="phoneNum"
+                  value={formData.phoneNum}
+                  onChange={handleChange}
+                />
+              </div>
+            </label>
 
-          <button type="submit">Enviar</button>
-        </form>
-        <img src={Astro} alt="" />
+            <label>
+              <h3>Correo:</h3>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </label>
+
+            <label className="descripcion-label">
+              <h3>Descripción:</h3>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                className="descripcion"
+              />
+            </label>
+
+            <button type="submit">Enviar</button>
+          </form>
+          <img src={Astro} alt="" />
         </div>
       )}
     </div>

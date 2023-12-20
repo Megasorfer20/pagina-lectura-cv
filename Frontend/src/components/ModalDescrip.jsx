@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./css/ModalDescrip.css";
 import astora from "../astora.png";
-import Prede from "../prede.jpg";  // Importa la imagen predeterminada
+import Prede from "../prede.jpg";  
 import Formulario from "./General/Formulario";
 import Carga from "./Carga";
 import PDF from "./General/PDF";
@@ -113,7 +113,7 @@ const ModalDescrip = ({ camperId, onClose }) => {
     softSkills = [],
   } = camperDetail;
 
-  const DEFAULT_IMAGE_URL = Prede;  // Imagen predeterminada
+  const DEFAULT_IMAGE_URL = Prede;
 
   return (
     <div className={`modal2${isDarkMode ? " dark-mode" : ""}`}>
@@ -234,7 +234,7 @@ const ModalDescrip = ({ camperId, onClose }) => {
                     {camperDetail.biography}
                   </p>
                 </div>
-                <Formulario></Formulario>
+                <Formulario camperId={camperId} />
               </div>
             )}
           </>
