@@ -20,7 +20,7 @@ const conection = async () => {
       campers: db.collection("campers"),
       campersDetails: db.collection("campersDetails"),
       programingLaguage: db.collection("programingLaguages"),
-      usersType: db.collection("usersTypes"),
+      usersTypes: db.collection("usersTypes"),
       users: db.collection("users"),
       notifications: db.collection("notifications"),
     };

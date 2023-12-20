@@ -29,7 +29,7 @@ export const postsControllers = async (req, res) => {
         );
         message = message.message;
         break;
-      case "usersType":
+      case "usersTypes":
         message = await postUsersType(data);
         break;
       case "programingLaguage":
@@ -151,7 +151,7 @@ const postUsersType = async (dataEntered) => {
       description,
       status: true,
     };
-    const usersTypeDB = (await conection()).usersType;
+    const usersTypeDB = (await conection()).usersTypes;
     await usersTypeDB.insertOne(data);
     return { message: "tipo de Usuario ingresado con éxito" };
   } catch (error) {

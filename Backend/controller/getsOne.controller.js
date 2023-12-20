@@ -22,7 +22,7 @@ export const getsOneControllers = async (req, res) => {
       case "users":
         data = await getUsers(idParse);
         break;
-      case "usersType":
+      case "usersTypes":
         data = await getUsersType(idParse);
         break;
       case "programingLaguage":
@@ -90,7 +90,7 @@ const getUsers = async (identifier) => {
 
 const getUsersType = async (identifier) => {
   try {
-    const usersTypeDB = (await conection()).usersType;
+    const usersTypeDB = (await conection()).usersTypes;
     const usersType = await usersTypeDB
       .find({ _id: identifier, status: true })
       .toArray();

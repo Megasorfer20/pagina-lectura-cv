@@ -18,8 +18,9 @@ export const getsControllers = async (req, res) => {
       case "users":
         data = await getUsers();
         break;
-      case "usersType":
+      case "usersTypes":
         data = await getUsersType();
+        console.log("Ya funciona?");
         break;
       case "programingLaguage":
         data = await getProgramingLanguage();
@@ -72,7 +73,7 @@ const getUsers = async () => {
 
 const getUsersType = async () => {
   try {
-    const usersTypeDB = (await conection()).usersType;
+    const usersTypeDB = (await conection()).usersTypes;
     const usersType = await usersTypeDB.find({ status: true }).toArray();
     return usersType;
   } catch (error) {

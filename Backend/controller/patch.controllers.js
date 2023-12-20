@@ -18,7 +18,7 @@ export const updatesControllers = async (req, res) => {
       case "users":
         message = await updateUsers(data, parsedId);
         break;
-      case "usersType":
+      case "usersTypes":
         message = await updateUsersType(data, parsedId);
         break;
       case "programingLaguage":
@@ -115,7 +115,7 @@ const updateUsersType = async (dataEntered, identifier) => {
       type,
       description,
     };
-    const usersTypeDB = (await conection()).usersType;
+    const usersTypeDB = (await conection()).usersTypes;
     await usersTypeDB.updateOne({ _id: identifier }, { $set: data });
     return { message: "tipo de Usuario actaulizado con éxito" };
   } catch (error) {
