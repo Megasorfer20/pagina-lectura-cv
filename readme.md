@@ -60,18 +60,30 @@ Tambien la el envio de los correos cuales tambien cumplen un papel importante al
 
 en general estos serian los end points: 
 
-Delet: 
 http://localhost:5000/API/campers
-http://localhost:5000/API/campersDetails
-http://localhost:5000/API/users
-http://localhost:5000/API/campersDetails
-http://localhost:5000/API/campersDetails
 
-
-
+http://localhost:5000/API/campersDetails
 
 http://localhost:5000/API/users
 
+http://localhost:5000/API/usersType
+
+http://localhost:5000/API/programingLaguage
+
+esos son algunos de los end points mas utilizados en el proyecto.
+
+por ultimo esta:
+
+http://localhost:5000/API/users
+
+hay que mandar como post con la siguiente estructura:
+
+{
+  "username": "nombreUser",
+  "email": "correoReal@gmail.com"
+}
+
+Esto enviara a un correo existente una informcacion sobre los campers.
 
 ### Databsase:
 
