@@ -7,7 +7,7 @@ const General = () => {
     <div className="descrip">
       <div className="center">
         <h2 className="tituloGen">
-          <span>Portfolio de Candidatos destacados</span>
+          <span>Portafolio de Candidatos destacados</span>
         </h2>
       </div>
       <img className="logo" src={Logo} alt="Logo" />
